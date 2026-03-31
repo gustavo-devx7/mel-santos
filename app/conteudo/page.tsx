@@ -188,7 +188,7 @@ const Content: React.FC = () => {
 
                         <button
                             className="subscription-button primary-button pulse"
-                            onClick={() => mostraDivPix(9)}
+                            onClick={() => mostraDivPix(9.9)}
                         >
                             <b>30 DIAS</b>
                             <span className="price">R$ 9,90</span>
@@ -208,7 +208,7 @@ const Content: React.FC = () => {
 
 
                             {/*  <a href={check19} className="subscription-link">*/}
-                            <button onClick={() => mostraDivPix(19)}
+                            <button onClick={() => mostraDivPix(19.9)}
                                 className="subscription-button outline-button">
                                 <div className="button-left">
                                     <span>3 Meses</span>
@@ -220,7 +220,7 @@ const Content: React.FC = () => {
 
 
                             {/*  <a href={check19} className="subscription-link">*/}
-                            <button onClick={() => mostraDivPix(69)}
+                            <button onClick={() => mostraDivPix(69.9)}
                                 className="subscription-button outline-button">
                                 <div className="button-left">
                                     <span>1 ANO</span>
@@ -269,9 +269,26 @@ const Content: React.FC = () => {
                 </div>
 
 
-                <div id="divPix" className={`${pixVisible ? "flex" : "hidden"} fixed top-[20%] left-1/2 -translate-x-1/2 z-50 w-full justify-center`}>
-                    <div className="w-[90%]">
-                        {pixVisible && <Pix valor={valorSelecionado} />}
+                <div
+                    id="divPix"
+                    className={`${pixVisible ? "flex" : "hidden"} fixed inset-0 z-50 items-center justify-center p-4`}
+                    onClick={() => setPixVisible(false)}
+                >
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div
+                        className="relative w-[90%] max-w-lg bg-white rounded-3xl shadow-xl p-6"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setPixVisible(false)}
+                            className="absolute right-3 top-3 z-10 rounded-full p-2 text-white shadow-lg"
+                            aria-label="Fechar popup"
+                        >
+                            ✕
+                        </button>
+                        <div className="space-y-4">
+                            {pixVisible && <Pix valor={valorSelecionado} />}
+                        </div>
                     </div>
                 </div>
 

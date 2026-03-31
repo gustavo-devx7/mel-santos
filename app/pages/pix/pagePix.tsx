@@ -19,12 +19,9 @@ export default function PagePix({ valor }: Props) {
   }
 
   return (
-    <main className="h-full bg-white/97 flex items-center justify-center p-4 rounded-2xl border-2">
-      <div className="w-full max-w-md">
-
-        {/* aqui você já tem o valor */}
-        <p>Valor selecionado: {valor}</p>
-
+    <main className="flex h-full w-full items-center justify-center">
+      <div className="w-full max-w-md bg-white rounded-3xl  shadow-xl p-5 md:p-8">
+       
         {!pixData ? (
           <PixForm
             valor={valor}
