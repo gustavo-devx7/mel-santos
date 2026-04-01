@@ -91,18 +91,18 @@ export function PixResult({ data, onReset, redirectUrl = "/sucesso" }: PixResult
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 flex flex-col items-center ">
       <div className="text-center">
         <h1 className="text-2xl font-semibold text-gray-900">PIX Gerado</h1>
         <p className="text-gray-500 mt-2">
           Escaneie o QR Code ou copie o código
         </p>
-        <p className="text-lg font-medium text-gray-900 mt-2">
+        <p className="text-lg font-medium text-gray-900 valorQr">
           Valor: {formatCurrency(data.amount)}
         </p>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center imgQr">
         <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
           {data.qrCodeBase64 ? (
             <Image
@@ -131,27 +131,29 @@ export function PixResult({ data, onReset, redirectUrl = "/sucesso" }: PixResult
       </div>
 
       {/* Indicador de verificação de pagamento */}
-      <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center justify-center gap-2 text-sm text-gray-500 aguardando">
         {isChecking && <Loader2 className="h-4 w-4 animate-spin" />}
         <span>Aguardando pagamento...</span>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-5 divCopiaCola">
         <p className="text-sm font-medium text-gray-700 text-center">
           PIX Copia e Cola
         </p>
-        <div className="relative">
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 pr-12 break-all text-sm text-gray-600 max-h-32 overflow-y-auto">
+        <div onClick={handleCopy}
+          className="relative">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 pr-12 break-all
+           text-gray-600 max-h-32 overflow-y-auto w-[80%] text-[10px] flex copiaCola">
             {data.copyPaste}
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 rounded-[10px]"
             onClick={handleCopy}
           >
             {copied ? (
-              <Check className="h-4 w-4 text-green-500" />
+              <Check className="h-4 w-4 text-white" />
             ) : (
               <Copy className="h-4 w-4 text-gray-500" />
             )}
@@ -161,7 +163,7 @@ export function PixResult({ data, onReset, redirectUrl = "/sucesso" }: PixResult
 
       <Button
         variant="outline"
-        className="w-full h-12"
+        className="h-8 w-[70%] mx-auto botaoGerarNovo mt-30 mb-20"
         onClick={onReset}
       >
         Gerar novo PIX

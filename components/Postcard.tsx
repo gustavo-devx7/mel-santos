@@ -35,10 +35,10 @@ export default function PostCard({ perfil, video, style }: PostCardProps) {
       </div>
 
       <div className="post-content">
-        <div className="post-video-container h-full">
+        <div className="post-video-container w-full aspect-[9/16] overflow-hidden">
           <video
             src={video}
-            className="post-video blur-[3px]"
+            className="post-video w-full h-full object-cover blur-[1.5px]"
             autoPlay
             loop
             muted

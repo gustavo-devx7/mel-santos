@@ -57,7 +57,7 @@ export default function PopUpTempo() {
       {/* VIDEO */}
       <div
         onClick={redCheck9}
-        className="cursor-pointer w-[80%] h-72 overflow-hidden rounded-lg blur-[2px]"
+        className="cursor-pointer w-[80%] h-72 overflow-hidden rounded-lg blur-[1px]"
       >
         <video
           src="/media/c28.mp4"

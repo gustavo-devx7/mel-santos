@@ -1,13 +1,17 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import './pages/pages.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+import { Poppins } from 'next/font/google'
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 export const metadata: Metadata = {
+
   title: 'Pagamento PIX',
   description: 'Realize seu pagamento via PIX de forma rápida e segura',
   generator: 'v0.app',
@@ -37,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
+      <body className={poppins.className}>
         {children}
         <Analytics />
       </body>

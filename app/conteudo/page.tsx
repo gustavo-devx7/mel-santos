@@ -36,7 +36,7 @@ const posts = [
 ];
 
 
-const check9 = "https://seguropagamentos.com.br/mel_santos9";
+//const check9 = "https://seguropagamentos.com.br/mel_santos9";
 const check19 = "https://seguropagamentos.com.br/mel_santos";
 
 const Content: React.FC = () => {
@@ -105,7 +105,7 @@ const Content: React.FC = () => {
                             autoPlay
                             muted
                             loop
-                            className="banner-image blur-[2px]"
+                            className="banner-image blur-[1px]"
                             style={{ objectPosition: "20% 60%", transform: "scale(1.4)" }}
                         />
 

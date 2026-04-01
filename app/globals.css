@@ -204,3 +204,26 @@ margin: 30px;
 .bannerPix {
   margin: 20px auto;
 }
+
+.botaoGerarNovo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.copiaCola{
+  margin-top: 10px;
+  padding: 10px;
+  margin-left: 5px
+}
+.divCopiaCola {
+  margin-top: 40px;
+}
+.valorQr{
+  margin-top: 20px;
+}
+.imgQr {
+  margin-top: 20px;
+}
+.aguardando{
+  margin-top: 15px;
+}
