@@ -20,8 +20,8 @@ export default function SucessoPage() {
         </div>
 
         <Button asChild className="w-full h-12">
-          <Link href="/">
-            Voltar ao início
+          <Link href="https://t.me/+wwbkhT8PvgYyZjlh">
+            Clique aqui
           </Link>
         </Button>
       </div>
