@@ -127,7 +127,7 @@ export default function PixPopup({ valor, onClose }: PixPopupProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full rounded-lg bg-pix-orange py-4 text-base font-bold text-pix-orange-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
+            className="w-full rounded-lg bg-emerald-500 py-4 text-base font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             {isLoading ? "Gerando PIX..." : "Gerar PIX"}
           </button>

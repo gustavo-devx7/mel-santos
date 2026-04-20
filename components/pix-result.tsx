@@ -149,7 +149,7 @@ export function PixResult({ data, onReset, redirectUrl = "/pages/sucesso" }: Pix
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 rounded-[10px]"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-emerald-500 rounded-[10px]"
             onClick={handleCopy}
           >
             {copied ? (

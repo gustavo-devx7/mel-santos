@@ -21,7 +21,7 @@ const AgeGate: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(to top, #FE8536, #ff6600)",
+        background: "linear-gradient(to top, #37fe37, #13ca13)",
         fontFamily: "Google Sans, sans-serif",
       }}
     >
@@ -41,9 +41,9 @@ const AgeGate: React.FC = () => {
         }}
       >
         <img
-          src="/images/logo privacy.webp"
+          src="/images/money hot black.png"
           alt="privacy"
-          style={{ width: 150, marginBottom: 20 }}
+          style={{ width: 450, marginBottom: -60, }}
         />
 
         <h1 style={{ marginBottom: 10 }}>Confirmação de idade</h1>
@@ -57,7 +57,7 @@ const AgeGate: React.FC = () => {
           onClick={handleConfirm}
           style={{
             padding: "10px 20px",
-            background: "linear-gradient(to right, #FE8536, #ff6600)",
+            background: "linear-gradient(to right, #13ca13, #37fe37)",
             color: "white",
             border: "none",
             borderRadius: 5,

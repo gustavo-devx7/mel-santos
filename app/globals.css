@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
+  --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -23,7 +23,7 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: rgb(245, 73, 0);
+  --chart-1: #13ca13;
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
@@ -37,10 +37,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --verde-escuro: #065f46;
+  --verde-claro: #059669;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #ffffff;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -119,14 +121,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    background-color: #ffffff;
   }
 }
 
 
 .promo-banner {
-  background-color: #ff641c;
+  background: linear-gradient(to right, var(--verde-400), var(--verde-500));
   color: #ffffff;
   text-align: center;
   padding: 10px 20px;
@@ -144,63 +148,74 @@
 body {
   margin: 0;
   padding-top: 50px;
-  /* Espaço para o banner */
 }
 
 .v1 {
-margin-top: 10%;
+  margin-top: 10%;
 }
 
 .v2 {
-margin-top: 10%;
+  margin-top: 10%;
 }
 
 .v3 {
-margin-top: 10%;
+  margin-top: 10%;
 }
 
 .v4 {
-margin-top: 10%;
+  margin-top: 10%;
 }
 
 .headerTempo {
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-.buttonTempo {
-background: linear-gradient(45deg, #ff3c00, #ff8c00);
-color: white;
-padding: 14px 28px;
-border-radius: 12px;
-font-size: 18px;
-font-weight: bold;
-cursor: pointer;
-border: none;
-margin: 30px;
 
-animation: pulo 1.5s infinite ease-in-out;
+.buttonTempo {
+  background: linear-gradient(45deg, var(--verde-claro), var(--verde-escuro));
+  color: white;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  margin: 30px;
+
+  animation: pulo 1.5s infinite ease-in-out;
 }
 
 @keyframes pulo {
-0% { transform: scale(1); }
-50% { transform: scale(1.04); }
-100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .confirmacao {
-margin-top: 50px;
-margin-bottom: 10px;
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
 .buttonConfirmacao {
-margin: 30px;
+  margin: 30px;
 }
+
 .logoPix {
   margin: 0 auto;
   margin-bottom: 10px;
 }
-.inputPix{
+
+.inputPix {
   margin: 10px;
 }
+
 .bannerPix {
   margin: 20px auto;
 }
@@ -210,32 +225,43 @@ margin: 30px;
   margin-bottom: 20px;
 }
 
-.copiaCola{
+.copiaCola {
   margin-top: 10px;
   padding: 10px;
   margin-left: 5px
 }
+
 .divCopiaCola {
   margin-top: 40px;
 }
-.valorQr{
+
+.valorQr {
   margin-top: 20px;
 }
+
 .imgQr {
   margin-top: 20px;
 }
-.aguardando{
+
+.aguardando {
   margin-top: 15px;
 }
+
 .aguarde {
   margin: 20px;
   font-weight: 600;
+  font-size: 12px;
 }
+
 .buttonUnlock {
-  background-color: rgb(245, 73, 0);
+  background-color: var(--verde-claro);
   border-radius: 10px;
   color: white;
   padding: 4px;
   font-weight: 500;
   margin: 10px;
+}
+
+.teste {
+  color: var(--verde-claro);
 }

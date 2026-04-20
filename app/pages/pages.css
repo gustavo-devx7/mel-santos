@@ -2,16 +2,19 @@
 
 
 :root {
-  --orange-50: #fff7ed;
-  --orange-100: #ffedd5;
-  --orange-200: #fed7aa;
-  --orange-300: #fdba74;
-  --orange-400: #fb923c;
-  --orange-500: #f97316;
-  --orange-600: #ea580c;
-  --orange-700: #c2410c;
-  --orange-800: #9a3412;
-  --orange-900: #7c2d12;
+  --verde-50: #ecfdf5;
+  --verde-100: #d1fae5;
+  --verde-200: #a7f3d0;
+  --verde-300: #6ee7b7;
+  --verde-400: #34d399;
+  --verde-500: #10b981;
+  --verde-600: #059669;
+  --verde-700: #047857;
+  --verde-800: #065f46;
+  --verde-900: #064e3b;
+
+  --verde-escuro: #065f46;
+  --verde-claro: #059669;
 
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
@@ -47,7 +50,7 @@
 }
 
 body {
-  background-color: var(--gray-50);
+  background-color: #ffffff;
   color: var(--gray-800);
   line-height: 1.5;
 }
@@ -83,7 +86,7 @@ body {
 }
 
 .logo-image {
-  height: 32px;
+  height: 192px;
   width: auto;
 }
 
@@ -243,28 +246,28 @@ main {
 
 .primary-button {
   background: linear-gradient(to right,
-      var(--orange-400),
-      var(--orange-500));
+      var(--verde-400),
+      var(--verde-500));
   color: white;
   border: none;
 }
 
 .primary-button:hover {
   background: linear-gradient(to right,
-      var(--orange-500),
-      var(--orange-600));
+      var(--verde-500),
+      var(--verde-600));
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 .outline-button {
   background-color: white;
-  border: 1px solid var(--orange-200);
+  border: 1px solid var(--verde-200);
   color: var(--gray-800);
 }
 
 .outline-button:hover {
-  background-color: var(--orange-50);
+  background-color: var(--verde-50);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -281,8 +284,8 @@ main {
   font-size: 0.75rem;
   font-weight: 500;
   border-radius: 9999px;
-  background-color: var(--orange-100);
-  color: var(--orange-800);
+  background-color: var(--verde-100);
+  color: var(--verde-800);
 }
 
 .price {
@@ -290,21 +293,21 @@ main {
 }
 
 .highlight {
-  color: var(--orange-600);
+  color: var(--verde-600);
 }
 
 /* Pulse Animation */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    box-shadow: 0 0 0 0 rgba(19, 202, 19, 0.7);
   }
 
   70% {
-    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+    box-shadow: 0 0 0 10px rgba(19, 202, 19, 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+    box-shadow: 0 0 0 0 rgba(19, 202, 19, 0);
   }
 }
 
@@ -360,17 +363,17 @@ main {
 }
 
 .tab.active {
-  background-color: var(--orange-50);
-  color: var(--orange-500);
+  background-color: var(--verde-50);
+  color: var(--verde-500);
   font-weight: 500;
 }
 
 .tab:first-child.active {
-  box-shadow: inset -1px 0 0 var(--orange-200);
+  box-shadow: inset -1px 0 0 var(--verde-200);
 }
 
 .tab:last-child.active {
-  box-shadow: inset 1px 0 0 var(--orange-200);
+  box-shadow: inset 1px 0 0 var(--verde-200);
 }
 
 .tab-content {
@@ -407,8 +410,8 @@ main {
 }
 
 .subtab.active {
-  background-color: var(--orange-100);
-  color: var(--orange-700);
+  background-color: var(--verde-100);
+  color: var(--verde-700);
   font-weight: 500;
 }
 
@@ -515,7 +518,7 @@ main {
 .locked-content {
   position: relative;
   height: 15rem;
-  background-color: var(--orange-50);
+  background-color: var(--verde-50);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -537,7 +540,7 @@ main {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 30%, var(--orange-50) 70%);
+    background: radial-gradient(circle, transparent 30%, var(--verde-50) 70%);
     opacity: 0.8;
   } */
 
@@ -613,7 +616,7 @@ main {
 .media-item {
   position: relative;
   aspect-ratio: 1 / 1;
-  background-color: var(--orange-50);
+  background-color: var(--verde-50);
   border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
@@ -626,7 +629,7 @@ main {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 30%, var(--orange-50) 70%);
+    background: radial-gradient(circle, transparent 30%, var(--verde-50) 70%);
     opacity: 0.8;
   } */
 
@@ -703,21 +706,6 @@ main {
   }
 }
 
-.promo-banner {
-  background-color: #ff641c;
-  color: #ffffff;
-  text-align: center;
-  padding: 10px 20px;
-  font-weight: bold;
-  font-family: Inter, sans-serif;
-  text-transform: uppercase;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
-  font-size: 15px;
-}
 
 body {
   margin: 0;

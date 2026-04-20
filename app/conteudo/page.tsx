@@ -68,9 +68,9 @@ const Content: React.FC = () => {
                 <div className="container header-container">
                     <div className="logo">
                         <img
-                            src="/images/logo privacy.webp"
+                            src="/images/money hot black.png"
                             alt="Logo"
-                            className="logo-image"
+                            className="logo-image w-[80%]"
                         />
                     </div>
                 </div>

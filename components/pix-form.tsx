@@ -72,10 +72,10 @@ export function PixForm({ valor, onSuccess, isLoading, setIsLoading }: PixFormPr
   return (
     <>
       <img className="logoPix object-cover h-10"
-        src="/images/logo privacy.webp" alt="imagem do privacy" />
+        src="/images/money hot black.png" alt="imagem do privacy" />
 
       <img src="/images/banner.png" alt="banner"
-       className="rounded-2xl bannerPix mb-6 object-cover h-40" />
+        className="rounded-2xl bannerPix mb-6 object-cover h-40" />
 
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -84,7 +84,7 @@ export function PixForm({ valor, onSuccess, isLoading, setIsLoading }: PixFormPr
           <p className="text-gray-500 mt-2">Preencha os dados para gerar o QR Code</p>
         </div>
 
-        <p className="text-center text-2xl font-bold text-orange-500">Valor: R$ {valor?.toFixed(2) ?? "0,00"}</p>
+        <p className="text-center text-2xl font-bold text-emerald-500">Valor: R$ {valor?.toFixed(2) ?? "0,00"}</p>
 
         <div className="space-y-4">
           <div className="inputPix space-y-2">
@@ -120,7 +120,7 @@ export function PixForm({ valor, onSuccess, isLoading, setIsLoading }: PixFormPr
 
         <Button
           type="submit"
-          className="w-full h-12 text-base bg-orange-500 text-white hover:bg-orange-600 focus-visible:ring-2 focus-visible:ring-orange-400"
+          className="w-full h-12 text-base bg-emerald-500 text-white hover:bg-emerald-600 focus-visible:ring-2 focus-visible:ring-emerald-400"
           disabled={isLoading}
         >
           {isLoading ? (
