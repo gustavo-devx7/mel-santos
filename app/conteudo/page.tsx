@@ -37,14 +37,10 @@ const posts = [
 
 
 //const check9 = "https://seguropagamentos.com.br/mel_santos9";
-const check19 = "https://seguropagamentos.com.br/mel_santos";
+//const check19 = "https://seguropagamentos.com.br/mel_santos";
 
 const Content: React.FC = () => {
     const router = useRouter();
-
-    function redCheck9() {
-        router.push("https://seguropagamentos.com.br/mel_santos9");
-    }
 
     const getFormattedDate = (daysAhead: number = 0): string => {
         const today = new Date();
@@ -65,19 +61,8 @@ const Content: React.FC = () => {
         setValorSelecionado(valor);
         setPixVisible(true);
     }
-
-
-
-
-
     return (
         <>
-
-
-
-
-
-
             {/* HEADER */}
             <header className="header">
                 <div className="container header-container">
@@ -96,9 +81,14 @@ const Content: React.FC = () => {
                 ESSA PROMOÇÃO É VÁLIDA ATÉ {promoDate}
             </div>
 
-            <main className="container">
+            <main className="container flex items-center flex-col">
+
+                <div className="aguarde text-center">
+                    AGUARDE, AS PRÉVIAS ESTÃO SENDO CARREGADAS...
+                </div>
+
                 {/* PROFILE */}
-                <div className="profile-section" style={{ marginBottom: 50 }}>
+                <div className="profile-section w-[99%]" style={{ marginBottom: 50 }}>
                     <div className="banner">
                         <video
                             src="/media/banner.mp4"
@@ -161,7 +151,7 @@ const Content: React.FC = () => {
                             </svg>
                         </div>
 
-                        <p className="username">@dix_mel.01</p>
+                        <p className="username">@mel.santos_7</p>
 
                         <p className="bio">
                             Meu amorzinho, você não vai ficar de fora né? Tô agora te esperando pra te mostrar minha bucetinha toda aberta pra você.
@@ -188,10 +178,10 @@ const Content: React.FC = () => {
 
                         <button
                             className="subscription-button primary-button pulse"
-                            onClick={() => mostraDivPix(9.9)}
+                            onClick={() => mostraDivPix(19.9)}
                         >
                             <b>30 DIAS</b>
-                            <span className="price">R$ 9,90</span>
+                            <span className="price">R$ 19,90</span>
                         </button>
                         <p className="badge" >
                             + CHAMADA DE VIDEO COMIGO HOJE!
@@ -208,13 +198,13 @@ const Content: React.FC = () => {
 
 
                             {/*  <a href={check19} className="subscription-link">*/}
-                            <button onClick={() => mostraDivPix(19.9)}
+                            <button onClick={() => mostraDivPix(29.9)}
                                 className="subscription-button outline-button">
                                 <div className="button-left">
                                     <span>3 Meses</span>
                                     <span className="badge">Economia</span>
                                 </div>
-                                <span className="price highlight">R$ 19,90</span>
+                                <span className="price highlight">R$ 29,90</span>
                             </button>
                             {/*   </a> */}
 
@@ -239,7 +229,7 @@ const Content: React.FC = () => {
 
                 {/* aba de videos */}
 
-                <div onClick={redCheck9} className="grid grid-cols-2 gap-2">
+                <div onClick={() => mostraDivPix(19.9)} className="grid grid-cols-2 gap-2">
                     {posts.map((post, i) => (
                         <PostCard
                             key={i}
@@ -251,9 +241,9 @@ const Content: React.FC = () => {
                     ))}
                 </div>
 
-                <a href={check19} className="subscription-link">
+                <a onClick={() => mostraDivPix(19.9)} className="subscription-link">
                     <button className="subscription-button primary-button">
-                        <b>VEJA TUDO POR APENAS <strong>R$ 9,90</strong></b>
+                        <b>VEJA TUDO POR APENAS <strong>R$ 19,90</strong></b>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none">
                             <path d="M8 5L15.57 11.6237C15.7976 11.8229 15.7976 12.1771 15.57 12.3763L8 19" stroke="#fff"
                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>

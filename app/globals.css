@@ -227,3 +227,7 @@ margin: 30px;
 .aguardando{
   margin-top: 15px;
 }
+.aguarde {
+  margin: 20px;
+  font-weight: 600;
+}
