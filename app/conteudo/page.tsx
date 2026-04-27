@@ -14,8 +14,7 @@ const posts = [
     { video: "/media/c15.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
     { video: "/media/c16.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
     { video: "/media/c21.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
-    { video: "/media/c34.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
-    { video: "/media/c34.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
+   // { video: "/media/c34.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
     { video: "/media/c42.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
 
 ];

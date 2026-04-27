@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { supabaseAdmin } from "@/lib/supabase-admin"
+import { getSupabaseAdmin } from "@/lib/supabase-admin"
 
 // Webhook para receber notificações da BuckPay
 // Configure esta URL no painel da BuckPay ou via postbackUrl ao criar a transação
@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
       console.log(`Valor: R$ ${(data.total_amount / 100).toFixed(2)}`)
 
       if (data.buyer?.email) {
+        const supabaseAdmin = getSupabaseAdmin()
         const { error } = await supabaseAdmin
           .from("customers")
           .upsert(

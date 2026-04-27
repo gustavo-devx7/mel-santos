@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { supabaseAdmin } from "@/lib/supabase-admin"
+import { getSupabaseAdmin } from "@/lib/supabase-admin"
 import { setCustomerSession } from "@/lib/auth-session"
 
 export async function POST(request: NextRequest) {
@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Digite um e-mail válido." }, { status: 400 })
     }
 
+    const supabaseAdmin = getSupabaseAdmin()
     const { data: customer, error } = await supabaseAdmin
       .from("customers")
       .select("email, status")
