@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
+import { supabaseAdmin } from "@/lib/supabase-admin"
 
 // Webhook para receber notificações da BuckPay
 // Configure esta URL no painel da BuckPay ou via postbackUrl ao criar a transação
@@ -50,17 +51,30 @@ export async function POST(request: NextRequest) {
 
     // Evento: transaction.processed = PIX pago
     if (event === "transaction.processed" && status === "paid") {
-      // Aqui você pode:
-      // 1. Atualizar o banco de dados marcando a transação como paga
-      // 2. Enviar email de confirmação para o comprador
-      // 3. Liberar o produto/serviço (entregável)
-      // 4. Notificar outros sistemas via API
-
       console.log(`PIX pago - Transação: ${transactionId}`)
       console.log(`Comprador: ${data.buyer?.name} (${data.buyer?.email})`)
       console.log(`Valor: R$ ${(data.total_amount / 100).toFixed(2)}`)
-      
-      // TODO: Implementar lógica de entrega do produto/serviço aqui
+
+      if (data.buyer?.email) {
+        const { error } = await supabaseAdmin
+          .from("customers")
+          .upsert(
+            {
+              email: data.buyer.email,
+              name: data.buyer.name ?? null,
+              transaction_id: transactionId,
+              status,
+              amount_cents: data.total_amount,
+            },
+            { onConflict: "transaction_id" }
+          )
+
+        if (error) {
+          console.error("Erro ao salvar cliente no Supabase:", error)
+        }
+      } else {
+        console.warn(`Transação paga sem email do comprador: ${transactionId}`)
+      }
     }
 
     // Evento: transaction.created = Transação pendente
@@ -69,13 +83,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Retorna 200 para confirmar recebimento do webhook
-    return NextResponse.json({ 
+    return NextResponse.json({
       received: true,
       event,
       transactionId,
       status,
     })
-
   } catch (error) {
     console.error("Erro no webhook:", error)
     // Retorna 200 mesmo com erro para evitar reenvios da BuckPay

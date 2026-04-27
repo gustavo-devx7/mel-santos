@@ -38,6 +38,39 @@
   --radius: 0.5rem;
   --radius-sm: 0.25rem;
   --radius-lg: 0.75rem;
+  --surface-app: #f6f7f4;
+  --surface-panel: #ffffff;
+  --surface-elevated: #fbfcfa;
+  --text-main: #20241f;
+  --text-soft: #5f665d;
+  --text-faint: #8e958d;
+  --line-soft: #e3e8e2;
+}
+
+.dark {
+  --surface-app: #0f1310;
+  --surface-panel: #151a16;
+  --surface-elevated: #1a211b;
+  --text-main: #eef2ec;
+  --text-soft: #a7b0a8;
+  --text-faint: #7f8880;
+  --line-soft: #283129;
+  --gray-50: #161b17;
+  --gray-100: #1d241f;
+  --gray-200: #283129;
+  --gray-300: #334036;
+  --gray-400: #81907f;
+  --gray-500: #9ba89a;
+  --gray-600: #bcc6bc;
+  --gray-700: #d3dbd2;
+  --gray-800: #e3e9e3;
+  --gray-900: #f5f8f4;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35),
+    0 1px 2px 0 rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 10px 20px -10px rgba(0, 0, 0, 0.6),
+    0 4px 10px -4px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 50px -12px rgba(0, 0, 0, 0.65);
 }
 
 * {
@@ -50,8 +83,8 @@
 }
 
 body {
-  background-color: #ffffff;
-  color: var(--gray-800);
+  background: var(--surface-app);
+  color: var(--text-main);
   line-height: 1.5;
 }
 
@@ -68,9 +101,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: white;
-  border-bottom: 1px solid var(--gray-100);
+  background-color: color-mix(in srgb, var(--surface-panel) 86%, transparent);
+  border-bottom: 1px solid var(--line-soft);
   box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(18px);
 }
 
 .header-container {
@@ -176,11 +210,12 @@ main {
 
 /* Cards */
 .card {
-  background-color: white;
+  background-color: var(--surface-panel);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
   overflow: hidden;
+  border: 1px solid var(--line-soft);
 }
 
 .card-header {
@@ -206,19 +241,19 @@ main {
   display: block;
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--text-main);
   margin-bottom: 0.25rem;
 }
 
 .username {
   font-size: 0.875rem;
-  color: var(--gray-500);
+  color: var(--text-soft);
   margin-bottom: 0.5rem;
 }
 
 .bio {
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: var(--text-soft);
   margin-top: 0.5rem;
 }
 
@@ -261,13 +296,13 @@ main {
 }
 
 .outline-button {
-  background-color: white;
+  background-color: var(--surface-panel);
   border: 1px solid var(--verde-200);
-  color: var(--gray-800);
+  color: var(--text-main);
 }
 
 .outline-button:hover {
-  background-color: var(--verde-50);
+  background-color: color-mix(in srgb, var(--verde-50) 58%, var(--surface-panel));
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -417,10 +452,11 @@ main {
 
 /* Post Card */
 .post-card {
-  background-color: white;
+  background-color: var(--surface-panel);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  border: 1px solid var(--line-soft);
 }
 
 .post-header {
@@ -428,7 +464,7 @@ main {
   align-items: center;
   justify-content: space-between;
   padding: 8px;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .post-user {
@@ -452,7 +488,7 @@ main {
 
 .post-username {
   font-size: 0.75rem;
-  color: var(--gray-500);
+  color: var(--text-soft);
 }
 
 .post-menu {
@@ -518,7 +554,7 @@ main {
 .locked-content {
   position: relative;
   height: 15rem;
-  background-color: var(--verde-50);
+  background-color: color-mix(in srgb, var(--verde-50) 60%, var(--surface-panel));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -567,8 +603,8 @@ main {
   gap: 1rem;
   padding: 0.75rem 1rem;
   font-size: 0.75rem;
-  color: var(--gray-600);
-  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--text-soft);
+  background-color: color-mix(in srgb, var(--surface-panel) 78%, transparent);
   border-radius: var(--radius);
 }
 
@@ -592,7 +628,7 @@ main {
   padding: 0.5rem;
   border: none;
   background-color: transparent;
-  color: var(--gray-600);
+  color: var(--text-soft);
   font-size: 0.875rem;
   cursor: pointer;
   border-radius: var(--radius-sm);
@@ -646,8 +682,8 @@ main {
   left: 0;
   right: 0;
   padding: 1rem;
-  background-color: white;
-  border-top: 1px solid var(--gray-200);
+  background-color: var(--surface-panel);
+  border-top: 1px solid var(--line-soft);
   box-shadow: var(--shadow-lg);
   z-index: 50;
 }
@@ -660,7 +696,7 @@ main {
 
 .cookie-consent p {
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: var(--text-soft);
 }
 
 .cookie-consent button {

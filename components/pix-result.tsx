@@ -13,7 +13,7 @@ interface PixResultProps {
   redirectUrl?: string
 }
 
-export function PixResult({ data, onReset, redirectUrl = "/pages/sucesso" }: PixResultProps) {
+export function PixResult({ data, onReset, redirectUrl = "/pages/plataforma" }: PixResultProps) {
   const [copied, setCopied] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
   const [isChecking, setIsChecking] = useState(true)

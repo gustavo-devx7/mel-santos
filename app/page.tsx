@@ -46,9 +46,9 @@ const AgeGate: React.FC = () => {
           style={{ width: 450, marginBottom: -60, }}
         />
 
-        <h1 style={{ marginBottom: 10 }}>Confirmação de idade</h1>
+        <h1 style={{ marginBottom: 10, color: "black",fontWeight:700 }}>Confirmação de idade</h1>
 
-        <p style={{ marginBottom: 20 }}>
+        <p style={{ marginBottom: 20, color: "black" }}>
           Este conteúdo é destinado exclusivamente para maiores de 18 anos.
           Por favor, confirme sua idade para continuar.
         </p>

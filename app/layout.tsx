@@ -3,12 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import './pages/pages.css'
 
-import { Poppins } from 'next/font/google'
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: '400',
-})
+import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
 
@@ -22,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>
-        {children}
-        <Analytics />
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

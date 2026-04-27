@@ -9,29 +9,14 @@ import Pix from "@/app/pages/pix/pagePix";
 
 
 const posts = [
-    { video: "/media/c1.mp4", style: { scale: "1" } },
-    { video: "/media/c3.mp4", style: { scale: "1", objectPosition: "50% 100%" } },
-    { video: "/media/c5.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c6.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c7.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c8.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c9.mp4", style: { scale: "1", objectPosition: "50% 20%" } },
-    { video: "/media/c11.mp4", style: { scale: "1", objectPosition: "50% 90%" } },
-    { video: "/media/c12.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
+    { video: "/media/c6.mp4", style: { scale: "1", objectPosition: "50% 40%" } },
     { video: "/media/c14.mp4", style: { scale: "1", objectPosition: "50% 40%" } },
     { video: "/media/c15.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
     { video: "/media/c16.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c17.mp4", style: { scale: "1", objectPosition: "50% 20%" } },
-    { video: "/media/c18.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c19.mp4", style: { scale: "1", objectPosition: "50% 20%" } },
-    { video: "/media/c20.mp4", style: { scale: "1", objectPosition: "50% 90%" } },
     { video: "/media/c21.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
-    { video: "/media/c22.mp4", style: { scale: "1" } },
-    { video: "/media/c23.mp4", style: { scale: "1" } },
-    { video: "/media/c25.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c26.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c27.mp4", style: { scale: "1", objectPosition: "50% 40%" } },
-    { video: "/media/c28.mp4", style: { scale: "1" } },
+    { video: "/media/c34.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
+    { video: "/media/c34.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
+    { video: "/media/c42.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
 
 ];
 
