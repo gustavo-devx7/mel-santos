@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
+import { sendBrevoEmail } from "@/lib/brevo"
+import { renderPaymentConfirmationEmail } from "@/components/emailTemplates/page"
 
 // Webhook para receber notificações da BuckPay
 // Configure esta URL no painel da BuckPay ou via postbackUrl ao criar a transação
@@ -72,6 +74,21 @@ export async function POST(request: NextRequest) {
 
         if (error) {
           console.error("Erro ao salvar cliente no Supabase:", error)
+        }
+
+        const emailResult = await sendBrevoEmail({
+          toEmail: data.buyer.email,
+          toName: data.buyer.name ?? "Cliente",
+          subject: "Pagamento recebido com sucesso",
+          htmlContent: renderPaymentConfirmationEmail({
+            buyerName: data.buyer.name,
+            transactionId,
+            totalAmount: data.total_amount,
+          }),
+        })
+
+        if (!emailResult.ok) {
+          console.error("Erro ao enviar email Brevo:", emailResult.error, emailResult.response)
         }
       } else {
         console.warn(`Transação paga sem email do comprador: ${transactionId}`)
