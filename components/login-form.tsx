@@ -45,31 +45,43 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="space-y-2">
-        <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-200">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5 items-center">
+
+      <div></div>
+      <div className="flex flex-col gap-6 w-full items-center mt-6">
+        <label
+          htmlFor="email"
+          className="text-sm font-medium text-neutral-700 dark:text-neutral-200"
+        >
           E-mail usado no pagamento
         </label>
+
         <input
           id="email"
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="voce@email.com"
-          className="h-12 w-full rounded-xl border border-neutral-300 bg-white px-4 text-sm text-neutral-900 outline-none transition focus:border-emerald-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
+          placeholder="exemplo@gmail.com"
+          className="h-12 w-[85%] rounded-xl border border-neutral-300 bg-white px-4 text-sm text-neutral-900 outline-none transition focus:border-emerald-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
           disabled={isLoading}
         />
       </div>
 
-      {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
+      {error && (
+        <p className="text-sm text-red-600 dark:text-red-400 -mt-2">
+          {error}
+        </p>
+      )}
 
       <button
         type="submit"
         disabled={isLoading}
-        className="h-12 w-full rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-60"
+        className="h-12 w-[85%] rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-60 mb-6"
       >
         {isLoading ? "Entrando..." : "Acessar plataforma"}
       </button>
+      <div></div>
+
     </form>
   )
 }
