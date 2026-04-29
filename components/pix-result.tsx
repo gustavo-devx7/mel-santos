@@ -13,7 +13,7 @@ interface PixResultProps {
   redirectUrl?: string
 }
 
-export function PixResult({ data, onReset, redirectUrl = "/pages/plataforma" }: PixResultProps) {
+export function PixResult({ data, onReset, redirectUrl = "/plataforma" }: PixResultProps) {
   const [copied, setCopied] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
   const [isChecking, setIsChecking] = useState(true)
@@ -43,14 +43,19 @@ export function PixResult({ data, onReset, redirectUrl = "/pages/plataforma" }: 
     // Verifica o status a cada 5 segundos
     const interval = setInterval(() => {
       if (!isPaid) {
-        checkPaymentStatus()
+        void checkPaymentStatus()
       }
     }, 5000)
 
     // Verifica imediatamente ao montar
-    checkPaymentStatus()
+    const initialCheck = setTimeout(() => {
+      void checkPaymentStatus()
+    }, 0)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      clearTimeout(initialCheck)
+    }
   }, [checkPaymentStatus, isPaid])
 
   const handleCopy = async () => {

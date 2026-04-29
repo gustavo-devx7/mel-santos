@@ -35,7 +35,7 @@ export function LoginForm() {
         throw new Error(data.error || "Não foi possível entrar.")
       }
 
-      router.push("/conteudo")
+      router.push("/plataforma")
       router.refresh()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Não foi possível entrar.")

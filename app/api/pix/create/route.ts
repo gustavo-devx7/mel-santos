@@ -11,6 +11,23 @@ interface CreatePixRequest {
   amount: number
 }
 
+interface BuckPayCreateResponse {
+  id?: string
+  message?: string
+  error?: string | { message?: string }
+  pix?: {
+    qrcode_base64?: string
+    code?: string
+  }
+  data?: {
+    id?: string
+    pix?: {
+      qrcode_base64?: string
+      code?: string
+    }
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     if (!BUCKPAY_API_URL || !BUCKPAY_API_KEY || !BUCKPAY_USER_AGENT) {
@@ -60,7 +77,7 @@ export async function POST(request: NextRequest) {
     const contentType = response.headers.get("content-type") || ""
     const text = await response.text()
 
-    let data: any = null
+    let data: BuckPayCreateResponse | null = null
     if (contentType.includes("application/json")) {
       data = JSON.parse(text)
     } else {
@@ -73,7 +90,7 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorMessage =
-        (data?.message || data?.error?.message || (typeof data?.error === "string" ? data.error : null)) ||
+        (data?.message || (typeof data?.error === "object" && data.error ? data.error.message : null) || (typeof data?.error === "string" ? data.error : null)) ||
         `Erro ao criar transação PIX (status ${response.status})`
 
       return NextResponse.json(
@@ -83,9 +100,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Mapeia a resposta da BuckPay para o formato esperado pelo frontend
-    const pixData = data.data?.pix || data.pix
+    const payload = data ?? {}
+    const pixData = payload.data?.pix || payload.pix
     return NextResponse.json({
-      transactionId: data.data?.id || data.id,
+      transactionId: payload.data?.id || payload.id,
       qrCodeBase64: pixData?.qrcode_base64 || "",
       copyPaste: pixData?.code || "",
       amount: body.amount,

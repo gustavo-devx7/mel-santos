@@ -1,6 +1,3 @@
-import { renderToStaticMarkup } from 'react-dom/server'
-import logo from "@/public/images/money hot black.png"
-
 interface PaymentConfirmationEmailProps {
     buyerName?: string
     transactionId: string
@@ -24,7 +21,7 @@ export function PaymentConfirmationEmail({
                                     <td align="center">
 
                                         <img
-                                            src="https://mel-santos.vercel.app/images/money hot black.png"
+                                            src="https://money-hot.vercel.app/images/money hot black.png"
                                             width="150"
                                             style={{ display: "block" }}
                                         />
@@ -35,7 +32,7 @@ export function PaymentConfirmationEmail({
                                         </div>
 
                                         <a
-                                            href="https://mel-santos.vercel.app/entrar"
+                                            href="https://money-hot.vercel.app/entrar"
                                             style={{
                                                 display: "inline-block",
                                                 marginTop: "20px",
@@ -59,8 +56,4 @@ export function PaymentConfirmationEmail({
             </body>
         </html>
     );
-}
-
-export function renderPaymentConfirmationEmail(props: PaymentConfirmationEmailProps): string {
-    return renderToStaticMarkup(<PaymentConfirmationEmail {...props} />)
 }

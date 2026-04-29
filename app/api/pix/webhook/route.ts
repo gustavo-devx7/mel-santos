@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase-admin"
 import { sendBrevoEmail } from "@/lib/brevo"
-import { renderPaymentConfirmationEmail } from "@/components/emailTemplates/page"
+import { renderPaymentConfirmationEmail } from "@/lib/payment-confirmation-email"
 
 // Webhook para receber notificações da BuckPay
 // Configure esta URL no painel da BuckPay ou via postbackUrl ao criar a transação

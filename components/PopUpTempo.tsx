@@ -60,7 +60,7 @@ export default function PopUpTempo() {
         className="cursor-pointer w-[80%] h-72 overflow-hidden rounded-lg blur-[1px]"
       >
         <video
-          src="/media/c28.mp4"
+          src="/media/c23.mp4"
           autoPlay
           loop
           muted
