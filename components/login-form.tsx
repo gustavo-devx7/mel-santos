@@ -13,7 +13,9 @@ export function LoginForm() {
     event.preventDefault()
     setError("")
 
-    if (!email.trim() || !email.includes("@")) {
+    const normalizedEmail = email.trim().toLowerCase()
+
+    if (!normalizedEmail || !normalizedEmail.includes("@")) {
       setError("Digite o mesmo e-mail usado no pagamento.")
       return
     }
@@ -26,12 +28,17 @@ export function LoginForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email.trim().toLowerCase() }),
+        body: JSON.stringify({ email: normalizedEmail }),
       })
 
       const data = await response.json()
 
       if (!response.ok) {
+        if (response.status === 403 && data.code === "ACCESS_EXPIRED") {
+          router.push(`/conteudo?renew=1&email=${encodeURIComponent(normalizedEmail)}`)
+          return
+        }
+
         throw new Error(data.error || "Não foi possível entrar.")
       }
 
@@ -45,10 +52,9 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5 items-center">
-
-      <div></div>
-      <div className="flex flex-col gap-6 w-full items-center mt-6">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-5">
+      <div />
+      <div className="mt-6 flex w-full flex-col items-center gap-6">
         <label
           htmlFor="email"
           className="text-sm font-medium text-neutral-700 dark:text-neutral-200"
@@ -67,21 +73,16 @@ export function LoginForm() {
         />
       </div>
 
-      {error && (
-        <p className="text-sm text-red-600 dark:text-red-400 -mt-2">
-          {error}
-        </p>
-      )}
+      {error && <p className="-mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>}
 
       <button
         type="submit"
         disabled={isLoading}
-        className="h-12 w-[85%] rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-60 mb-6"
+        className="mb-6 h-12 w-[85%] rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-60"
       >
         {isLoading ? "Entrando..." : "Acessar plataforma"}
       </button>
-      <div></div>
-
+      <div />
     </form>
   )
 }

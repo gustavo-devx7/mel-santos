@@ -22,12 +22,12 @@ interface Modelo {
 const modelos: Modelo[] = [
     {
         id: 1,
-        nome: "Nome da Modelo",
-        slug: "@nomemodelo",
+        nome: "Mel Santos",
+        slug: "@dix.mel_01",
         pasta: "/mel-santos",
-        totalFotos: 0,
-        totalVideos: 0,
-        foto: null, // substitua por: "/fotos/modelo1.jpg"
+        totalFotos: 9,
+        totalVideos: 9,
+        foto: 'images/mel-santos/perfil.webp', // substitua por: "/fotos/modelo1.jpg"
     },
 ];
 
@@ -163,13 +163,13 @@ function CardModelo({ modelo }: { modelo: Modelo }) {
                         display: "flex", alignItems: "center", gap: "5px",
                         fontSize: "12px", color: "#6b7280", fontWeight: 600,
                     }}>
-                        <IconPhoto /> {modelo.totalFotos} fotos
+                        <IconPhoto /> {modelo.totalFotos}+ fotos
                     </span>
                     <span style={{
                         display: "flex", alignItems: "center", gap: "5px",
                         fontSize: "12px", color: "#6b7280", fontWeight: 600,
                     }}>
-                        <IconVideo /> {modelo.totalVideos} vídeos
+                        <IconVideo /> {modelo.totalVideos}+ vídeos
                     </span>
                 </div>
 

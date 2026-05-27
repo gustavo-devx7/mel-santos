@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from "react";
-import { useRouter } from 'next/navigation';
 import PostCard from "@/components/Postcard";
 import PopUpTempo from "@/components/PopUpTempo";
 import Pix from "@/app/pages/pix/pagePix";
@@ -24,8 +23,6 @@ const posts = [
 //const check19 = "https://seguropagamentos.com.br/mel_santos";
 
 const Content: React.FC = () => {
-    const router = useRouter();
-
     const getFormattedDate = (daysAhead: number = 0): string => {
         const today = new Date();
         today.setDate(today.getDate() + daysAhead);
@@ -47,12 +44,14 @@ const Content: React.FC = () => {
     }
     return (
         <>
+            <div aria-hidden="true" className="h-[50px]" />
+
             {/* HEADER */}
             <header className="header">
                 <div className="container header-container">
                     <div className="logo">
                         <img
-                            src="/images/money hot black.png"
+                            src="/images/money hot white.png"
                             alt="Logo"
                             className="logo-image w-[80%]"
                         />
@@ -164,11 +163,11 @@ const Content: React.FC = () => {
                             className="subscription-button primary-button pulse"
                             onClick={() => mostraDivPix(19.9)}
                         >
-                            <b>30 DIAS</b>
+                            <b>7 DIAS</b>
                             <span className="price">R$ 19,90</span>
                         </button>
                         <p className="badge" >
-                            + CHAMADA DE VIDEO COMIGO HOJE!
+                            ACESSO SEMANAL. RENOVE A CADA 7 DIAS PARA CONTINUAR.
                         </p>
 
                         <div className="promotions">
@@ -228,7 +227,7 @@ const Content: React.FC = () => {
 
                 <a onClick={() => mostraDivPix(19.9)} className="subscription-link">
                     <button className="subscription-button primary-button">
-                        <b>VEJA TUDO POR APENAS <strong>R$ 19,90</strong></b>
+                        <b>LIBERE 7 DIAS POR APENAS <strong>R$ 19,90</strong></b>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none">
                             <path d="M8 5L15.57 11.6237C15.7976 11.8229 15.7976 12.1771 15.57 12.3763L8 19" stroke="#fff"
                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>

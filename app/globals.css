@@ -266,3 +266,7 @@ body {
 .teste {
   color: var(--verde-claro);
 }
+
+body {
+  padding-top: 0;
+}

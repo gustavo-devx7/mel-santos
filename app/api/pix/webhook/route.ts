@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getSupabaseAdmin } from "@/lib/supabase-admin"
+import { execute } from "@/lib/db"
 import { sendBrevoEmail } from "@/lib/brevo"
 import { renderPaymentConfirmationEmail } from "@/lib/payment-confirmation-email"
 
@@ -58,22 +58,16 @@ export async function POST(request: NextRequest) {
       console.log(`Valor: R$ ${(data.total_amount / 100).toFixed(2)}`)
 
       if (data.buyer?.email) {
-        const supabaseAdmin = getSupabaseAdmin()
-        const { error } = await supabaseAdmin
-          .from("customers")
-          .upsert(
-            {
-              email: data.buyer.email,
-              name: data.buyer.name ?? null,
-              transaction_id: transactionId,
-              status,
-              amount_cents: data.total_amount,
-            },
-            { onConflict: "transaction_id" }
+        try {
+          await execute(
+            `INSERT INTO customers (email, name, transaction_id, status, amount_cents)
+             VALUES ($1, $2, $3, $4, $5)
+             ON CONFLICT (transaction_id) DO UPDATE SET
+             email = $1, name = $2, status = $4, amount_cents = $5`,
+            [data.buyer.email, data.buyer.name ?? null, transactionId, status, data.total_amount]
           )
-
-        if (error) {
-          console.error("Erro ao salvar cliente no Supabase:", error)
+        } catch (error) {
+          console.error("Erro ao salvar cliente no banco de dados:", error)
         }
 
         const emailResult = await sendBrevoEmail({

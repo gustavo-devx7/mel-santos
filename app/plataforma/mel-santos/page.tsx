@@ -21,11 +21,297 @@ interface MediaItem {
 // DADOS DE EXEMPLO — substitua pela sua API
 // =============================================
 const mockMedia: MediaItem[] = [
+/*--------------- fotos ----------------- */
+{
+  id: 1,
+  type: "foto",
+  src: "/images/mel-santos/f1.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 284,
+},
 
-  { id: 1, type: "foto", src: "/media/banner.png", title: "Ensaio Exclusivo", creator: "Melissa Santos", likes: 284 },
+{
+  id: 2,
+  type: "foto",
+  src: "/images/mel-santos/f2.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 847,
+},
 
-  { id: 2, type: "video", src: "/media/c1.mp4", title: "Behind the Scenes", creator: "Melissa Santos", likes: 519, duration: "4:32" },
+{
+  id: 3,
+  type: "foto",
+  src: "/images/mel-santos/f3.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1293,
+},
+
+{
+  id: 4,
+  type: "foto",
+  src: "/images/mel-santos/f4.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 672,
+},
+
+{
+  id: 5,
+  type: "foto",
+  src: "/images/mel-santos/f5.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2145,
+},
+
+{
+  id: 6,
+  type: "foto",
+  src: "/images/mel-santos/f6.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 991,
+},
+
+{
+  id: 7,
+  type: "foto",
+  src: "/images/mel-santos/f7.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1584,
+},
+
+{
+  id: 8,
+  type: "foto",
+  src: "/images/mel-santos/f8.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 731,
+},
+
+{
+  id: 9,
+  type: "foto",
+  src: "/images/mel-santos/f9.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2468,
+},
+
+{
+  id: 10,
+  type: "foto",
+  src: "/images/mel-santos/f10.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1369,
+},
+
+{
+  id: 11,
+  type: "foto",
+  src: "/images/mel-santos/f11.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1892,
+},
+
+{
+  id: 12,
+  type: "foto",
+  src: "/images/mel-santos/f12.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 543,
+},
+
+{
+  id: 13,
+  type: "foto",
+  src: "/images/mel-santos/f13.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2784,
+},
+
+{
+  id: 14,
+  type: "foto",
+  src: "/images/mel-santos/f14.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1648,
+},
+
+{
+  id: 15,
+  type: "foto",
+  src: "/images/mel-santos/f15.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 885,
+},
+
+{
+  id: 16,
+  type: "foto",
+  src: "/images/mel-santos/f16.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 3127,
+},
+
+{
+  id: 17,
+  type: "foto",
+  src: "/images/mel-santos/f17.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1196,
+},
+
+{
+  id: 18,
+  type: "foto",
+  src: "/images/mel-santos/f18.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2673,
+},
+
+{
+  id: 19,
+  type: "foto",
+  src: "/images/mel-santos/f19.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 742,
+},
+
+{
+  id: 20,
+  type: "foto",
+  src: "/images/mel-santos/f20.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1985,
+},
+
+{
+  id: 21,
+  type: "foto",
+  src: "/images/mel-santos/f21.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1437,
+},
+
+{
+  id: 22,
+  type: "foto",
+  src: "/images/mel-santos/f22.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2561,
+},
+
+{
+  id: 23,
+  type: "foto",
+  src: "/images/mel-santos/f23.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 918,
+},
+
+{
+  id: 24,
+  type: "foto",
+  src: "/images/mel-santos/f24.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 3348,
+},
+
+{
+  id: 25,
+  type: "foto",
+  src: "/images/mel-santos/f25.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1752,
+},
+
+{
+  id: 26,
+  type: "foto",
+  src: "/images/mel-santos/f26.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1284,
+},
+
+{
+  id: 27,
+  type: "foto",
+  src: "/images/mel-santos/f27.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2894,
+},
+
+{
+  id: 28,
+  type: "foto",
+  src: "/images/mel-santos/f28.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1067,
+},
+
+{
+  id: 29,
+  type: "foto",
+  src: "/images/mel-santos/f29.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 2419,
+},
+
+{
+  id: 30,
+  type: "foto",
+  src: "/images/mel-santos/f30.webp",
+  title: "Ensaio Exclusivo",
+  creator: "Melissa Santos",
+  likes: 1576,
+}
+
+
+
+  
+ /* -------------------------- videos -----------------------------
+ {
+    id: 2,
+    type: "video",
+    src: "https://cdn.sliv.pw/video/xsliv/69_xzWwass/video3.mp4",
+    title: "Behind the Scenes",
+    creator: "Melissa Santos",
+    likes: 519,
+    duration: "4:32",
+  },*/
+
 ];
+
+
+
+
+
 
 // =============================================
 // ÍCONES SVG INLINE
@@ -284,8 +570,8 @@ export default function Plataforma() {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
-            {/* NOME DO SITE */}
-            SeuSite
+            
+            Money Hot
           </span>
         </div>
 
@@ -473,7 +759,7 @@ export default function Plataforma() {
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}>
-          ✦ SeuSite
+          ✦ Money Hot
         </span>
         <span style={{ fontSize: "12px", color: textMuted }}>
           © {new Date().getFullYear()} · Todos os direitos reservados

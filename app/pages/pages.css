@@ -805,3 +805,7 @@ body {
 .buttonConfirmacao {
   margin: 30px;
 }
+
+body {
+  padding-top: 0;
+}

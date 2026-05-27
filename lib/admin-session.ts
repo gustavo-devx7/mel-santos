@@ -1,7 +1,9 @@
 import { cookies } from "next/headers"
 import { createHmac, timingSafeEqual } from "node:crypto"
 
-const SESSION_COOKIE_NAME = "customer_session"
+const ADMIN_COOKIE_NAME = "admin_session"
+const ADMIN_PASSWORD = "!15Admin07!"
+
 function getSessionSecret() {
   const secret = process.env.SESSION_SECRET
 
@@ -16,19 +18,18 @@ function signValue(value: string) {
   return createHmac("sha256", getSessionSecret()).update(value).digest("hex")
 }
 
-export function createSessionToken(email: string, expiresAt: Date) {
+function createAdminSessionToken(expiresAt: Date) {
   const payload = Buffer.from(
     JSON.stringify({
-      email,
+      role: "admin",
       exp: Math.floor(expiresAt.getTime() / 1000),
     })
   ).toString("base64url")
 
-  const signature = signValue(payload)
-  return `${payload}.${signature}`
+  return `${payload}.${signValue(payload)}`
 }
 
-export function readSessionToken(token: string | undefined) {
+function readAdminSessionToken(token: string | undefined) {
   if (!token) {
     return null
   }
@@ -49,39 +50,42 @@ export function readSessionToken(token: string | undefined) {
 
   try {
     const parsed = JSON.parse(Buffer.from(payload, "base64url").toString("utf-8")) as {
-      email?: string
+      role?: string
       exp?: number
     }
 
-    if (!parsed.email || !parsed.exp || parsed.exp < Math.floor(Date.now() / 1000)) {
+    if (parsed.role !== "admin" || !parsed.exp || parsed.exp < Math.floor(Date.now() / 1000)) {
       return null
     }
 
-    return { email: parsed.email }
+    return { role: "admin" as const }
   } catch {
     return null
   }
 }
 
-export async function setCustomerSession(email: string, expiresAt: Date) {
-  const cookieStore = await cookies()
-  const maxAge = Math.max(0, Math.floor((expiresAt.getTime() - Date.now()) / 1000))
+export function isValidAdminPassword(password: string) {
+  return password === ADMIN_PASSWORD
+}
 
-  cookieStore.set(SESSION_COOKIE_NAME, createSessionToken(email, expiresAt), {
+export async function setAdminSession() {
+  const cookieStore = await cookies()
+
+  cookieStore.set(ADMIN_COOKIE_NAME, createAdminSessionToken(new Date(Date.now() + 1000 * 60 * 60 * 12)), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
-    maxAge,
+    maxAge: 60 * 60 * 12,
   })
 }
 
-export async function clearCustomerSession() {
+export async function clearAdminSession() {
   const cookieStore = await cookies()
-  cookieStore.delete(SESSION_COOKIE_NAME)
+  cookieStore.delete(ADMIN_COOKIE_NAME)
 }
 
-export async function getCustomerSession() {
+export async function getAdminSession() {
   const cookieStore = await cookies()
-  return readSessionToken(cookieStore.get(SESSION_COOKIE_NAME)?.value)
+  return readAdminSessionToken(cookieStore.get(ADMIN_COOKIE_NAME)?.value)
 }

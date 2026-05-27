@@ -27,17 +27,19 @@ export function renderPaymentConfirmationEmail(props: PaymentConfirmationEmailPr
                       src="https://money-hot.vercel.app/images/money hot black.png"
                       width="150"
                       style="display:block;"
-                      alt="Mel Santos"
+                      alt="Money Hot"
                     />
                     <div>
-                      <h1>Pagamento confirmado, ${escapedBuyerName}.</h1>
-                      <p>Seu acesso foi liberado. Entre na plataforma pelo botão abaixo.</p>
+                      <h1>Pagamento semanal confirmado, ${escapedBuyerName}.</h1>
+                      <p>Seu acesso fica liberado por 7 dias a partir da confirmação do pagamento.</p>
+                      <p>Transação: ${props.transactionId}</p>
+                      <p>Valor pago: R$ ${(props.totalAmount / 100).toFixed(2)}</p>
                     </div>
                     <a
                       href="https://money-hot.vercel.app/entrar"
                       style="display:inline-block;margin-top:20px;padding:12px 20px;background-color:#000;color:white;text-decoration:none;border-radius:5px;"
                     >
-                      Acessar plataforma
+                      Acessar meus 7 dias
                     </a>
                   </td>
                 </tr>

@@ -306,8 +306,8 @@ export default function Plataforma() {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
-            {/* NOME DO SITE */}
-            SeuSite
+      
+            Money Hot
           </span>
         </div>
 
@@ -495,7 +495,7 @@ export default function Plataforma() {
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}>
-          ✦ SeuSite
+          ✦ Money Hot
         </span>
         <span style={{ fontSize: "12px", color: textMuted }}>
           © {new Date().getFullYear()} · Todos os direitos reservados
