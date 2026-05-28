@@ -71,17 +71,15 @@ export function PixForm({ valor, onSuccess, isLoading, setIsLoading }: PixFormPr
 
   return (
     <>
-      <img className="logoPix object-cover h-10"
-        src="/images/money hot black.png" alt="imagem do privacy" />
+      <div className="flex flex-col items-center -gap-20 justify-start -translate-y-8">
+        <img className="h-20 w-auto object-contain" src="/images/money hot black.png" />
 
-      <img src="/images/banner.png" alt="banner"
-        className="rounded-2xl bannerPix mb-6 object-cover h-40" />
-
-
-      <form onSubmit={handleSubmit} className="space-y-6">
+        <img className="h-40 w-full object-cover rounded-2xl" src="/images/banner.png" />
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-2 -translate-y-7">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-semibold text-gray-900">Pagamento via PIX</h1>
-          <p className="text-gray-500 mt-2">Preencha os dados para gerar o QR Code</p>
+          <p className="text-gray-500 mt-2 text-sm">Preencha os dados para gerar o QR Code</p>
         </div>
 
         <p className="text-center text-2xl font-bold text-emerald-500">Valor: R$ {valor?.toFixed(2) ?? "0,00"}</p>
@@ -96,11 +94,11 @@ export function PixForm({ valor, onSuccess, isLoading, setIsLoading }: PixFormPr
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={isLoading}
-              className="h-12"
+              className="h-12 placeholder-gray-700 !px-2 translate-y-1 text-gray-700"
             />
           </div>
 
-          <div className="inputPix space-y-2">
+          <div className="inputPix translate-y-3">
             <Label htmlFor="email" className="text-gray-700">E-mail</Label>
             <Input
               id="email"
@@ -109,7 +107,7 @@ export function PixForm({ valor, onSuccess, isLoading, setIsLoading }: PixFormPr
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
-              className="h-12"
+              className="h-12 placeholder-gray-700 !px-2 translate-y-1 !mb-6 text-gray-700"
             />
           </div>
         </div>

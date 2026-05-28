@@ -29,6 +29,7 @@ const modelos: Modelo[] = [
         totalVideos: 9,
         foto: 'images/mel-santos/perfil.webp', // substitua por: "/fotos/modelo1.jpg"
     },
+    
 ];
 
 // =============================================
@@ -82,121 +83,187 @@ function CardModelo({ modelo }: { modelo: Modelo }) {
                 background: "#161b26",
                 border: `1px solid ${hovered ? "#059669" : "#1f2937"}`,
                 boxShadow: hovered
-                    ? "0 8px 32px rgba(5,150,105,0.3)"
-                    : "0 2px 12px rgba(0,0,0,0.4)",
+                    ? "0 8px 24px rgba(5,150,105,0.25)"
+                    : "0 2px 10px rgba(0,0,0,0.35)",
                 transition: "all 0.25s cubic-bezier(.4,0,.2,1)",
-                transform: hovered ? "translateY(-5px)" : "translateY(0)",
+                transform: hovered ? "translateY(-4px)" : "translateY(0)",
                 cursor: "pointer",
-                width: "100%",
-                maxWidth: "280px",
+                width: "180px",
             }}
         >
             {/* Foto da modelo */}
-            <div style={{
-                position: "relative",
-                aspectRatio: "3/4",
-                background: "#0d1117",
-                overflow: "hidden",
-            }}>
+            <div
+                style={{
+                    position: "relative",
+                    height: "220px",
+                    background: "#0d1117",
+                    overflow: "hidden",
+                }}
+            >
                 {modelo.foto ? (
                     <img
                         src={modelo.foto}
                         alt={modelo.nome}
                         style={{
-                            width: "100%", height: "100%", objectFit: "cover", display: "block",
-                            transform: hovered ? "scale(1.05)" : "scale(1)",
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            display: "block",
+                            transform: hovered ? "scale(1.04)" : "scale(1)",
                             transition: "transform 0.4s ease",
                         }}
                     />
                 ) : (
-                    /* Placeholder até você adicionar a foto */
-                    <div style={{
-                        width: "100%", height: "100%",
-                        display: "flex", flexDirection: "column",
-                        alignItems: "center", justifyContent: "center",
-                        gap: "12px",
-                        background: "linear-gradient(160deg, #0d1117 0%, #161b26 100%)",
-                        border: "2px dashed #1f2937",
-                    }}>
-                        <div style={{
-                            width: "64px", height: "64px",
-                            borderRadius: "50%",
-                            background: "#1f2937",
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                            color: "#374151",
-                        }}>
+                    <div
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "10px",
+                            background:
+                                "linear-gradient(160deg, #0d1117 0%, #161b26 100%)",
+                            border: "2px dashed #1f2937",
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: "52px",
+                                height: "52px",
+                                borderRadius: "50%",
+                                background: "#1f2937",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                color: "#374151",
+                            }}
+                        >
                             <IconUser />
                         </div>
-                        <span style={{ color: "#374151", fontSize: "12px", fontWeight: 600, letterSpacing: "0.05em" }}>
+
+                        <span
+                            style={{
+                                color: "#374151",
+                                fontSize: "11px",
+                                fontWeight: 600,
+                                letterSpacing: "0.05em",
+                            }}
+                        >
                             FOTO EM BREVE
                         </span>
                     </div>
                 )}
 
-                {/* Badge gradiente no canto */}
-                <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0,
-                    height: "80px",
-                    background: "linear-gradient(to top, rgba(10,15,26,0.95), transparent)",
-                    pointerEvents: "none",
-                }} />
+                {/* Gradiente */}
+                <div
+                    style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: "60px",
+                        background:
+                            "linear-gradient(to top, rgba(10,15,26,0.95), transparent)",
+                        pointerEvents: "none",
+                    }}
+                />
             </div>
 
-            {/* Info */}
-            <div style={{ padding: "16px 18px 18px" }}>
-                <h3 style={{
-                    margin: "0 0 4px",
-                    fontSize: "17px",
-                    fontWeight: 800,
-                    color: "#f9fafb",
-                    letterSpacing: "-0.02em",
-                }}>
+            {/* Conteúdo cards das modelos*/}
+            <div style={{
+                padding: "10px",
+                justifyContent: "center"
+            }}>
+                <h3
+                    style={{
+                        margin: "0 0 3px",
+                        fontSize: "14px",
+                        fontWeight: 800,
+                        color: "#f9fafb",
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.2,
+                    }}
+                >
                     {modelo.nome}
                 </h3>
-                <p style={{ margin: "0 0 14px", fontSize: "13px", color: "#059669", fontWeight: 600 }}>
+
+                <p
+                    style={{
+                        margin: "0 0 8px",
+                        fontSize: "11px",
+                        color: "#059669",
+                        fontWeight: 600,
+                    }}
+                >
                     {modelo.slug}
                 </p>
 
                 {/* Stats */}
-                <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
-                    <span style={{
-                        display: "flex", alignItems: "center", gap: "5px",
-                        fontSize: "12px", color: "#6b7280", fontWeight: 600,
-                    }}>
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "6px",
+                        marginBottom: "8px",
+                        flexWrap: "wrap",
+                    }}
+                >
+                    <span
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "3px",
+                            fontSize: "10px",
+                            color: "#6b7280",
+                            fontWeight: 600,
+                        }}
+                    >
                         <IconPhoto /> {modelo.totalFotos}+ fotos
                     </span>
-                    <span style={{
-                        display: "flex", alignItems: "center", gap: "5px",
-                        fontSize: "12px", color: "#6b7280", fontWeight: 600,
-                    }}>
+
+                    <span
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "3px",
+                            fontSize: "10px",
+                            color: "#6b7280",
+                            fontWeight: 600,
+                        }}
+                    >
                         <IconVideo /> {modelo.totalVideos}+ vídeos
                     </span>
                 </div>
 
                 {/* Botão */}
-                <button style={{
-                    width: "100%",
-                    background: hovered
-                        ? "linear-gradient(135deg, #059669, #065f46)"
-                        : "#1f2937",
-                    color: hovered ? "#fff" : "#9ca3af",
-                    border: "none",
-                    borderRadius: "10px",
-                    padding: "10px",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    cursor: "pointer",
-                    display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-                    transition: "all 0.2s",
-                    letterSpacing: "0.04em",
-                }}
-                onClick={() => router.push("/plataforma" + modelo.pasta)}
+                <button
+                    style={{
+                        width: "100%",
+                        background: hovered
+                            ? "linear-gradient(135deg, #059669, #065f46)"
+                            : "#1f2937",
+                        color: hovered ? "#fff" : "#9ca3af",
+                        border: "none",
+                        borderRadius: "8px",
+                        padding: "7px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "5px",
+                        transition: "all 0.2s",
+                        letterSpacing: "0.03em",
+                    }}
+                    onClick={() => router.push("/plataforma" + modelo.pasta)}
                 >
                     VER CONTEÚDO <IconArrow />
                 </button>
             </div>
         </div>
-    );
+    )
 }
 
 // =============================================
@@ -308,10 +375,10 @@ export default function Vitrine() {
                 borderRadius: "20px",
                 overflow: "hidden",
                 position: "relative",
-                height: "200px",
+                height: "70px",
                 background: "linear-gradient(135deg, #065f46 0%, #059669 40%, #034d38 100%)",
                 display: "flex", alignItems: "center",
-                cursor: "pointer",
+                cursor: "pointer"
             }}>
                 {/* Detalhes decorativos */}
                 <div style={{
@@ -329,20 +396,18 @@ export default function Vitrine() {
                     pointerEvents: "none",
                 }} />
 
-                {/* Espaço esquerdo para imagem decorativa */}
-                {/* ↓↓↓ coloque uma imagem de divulgação aqui se quiser ↓↓↓ */}
-                {/* <img src="/banner-modelo.png" style={{ position:"absolute", left:0, bottom:0, height:"100%", objectFit:"cover" }} /> */}
+
 
                 <div style={{ padding: "0 48px", position: "relative", zIndex: 1 }}>
                     <p style={{
-                        fontSize: "12px", fontWeight: 700, letterSpacing: "0.15em",
-                        color: "rgba(255,255,255,0.6)", marginBottom: "8px", textTransform: "uppercase",
+                        fontSize: "9px", fontWeight: 700, letterSpacing: "0.15em",
+                        color: "rgba(255,255,255,0.6)", marginBottom: "8px", marginTop: "20px", textTransform: "uppercase",
                     }}>
                         Conteúdo exclusivo
                     </p>
                     {/* ↓↓↓ TEXTO DO BANNER — edite como quiser ↓↓↓ */}
                     <h2 style={{
-                        fontSize: "clamp(24px, 4vw, 42px)",
+                        fontSize: "clamp(12px, 4vw, 42px)",
                         fontWeight: 900,
                         color: "#ffffff",
                         letterSpacing: "-0.03em",
@@ -352,24 +417,6 @@ export default function Vitrine() {
                     }}>
                         Conheça nossas<br />modelos exclusivas
                     </h2>
-                    <button style={{
-                        background: "#ffffff",
-                        color: "#065f46",
-                        border: "none",
-                        borderRadius: "24px",
-                        padding: "10px 24px",
-                        fontSize: "13px",
-                        fontWeight: 800,
-                        cursor: "pointer",
-                        letterSpacing: "0.05em",
-                        boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
-                        transition: "transform 0.15s",
-                    }}
-                        onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.transform = "scale(1.04)")}
-                        onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.transform = "scale(1)")}
-                    >
-                        VER TUDO →
-                    </button>
                 </div>
             </div>
 
@@ -404,6 +451,7 @@ export default function Vitrine() {
                         display: "flex",
                         flexWrap: "wrap",
                         gap: "20px",
+                        justifyContent: "center",
                     }}>
                         {filtradas.map(m => <CardModelo key={m.id} modelo={m} />)}
                     </div>

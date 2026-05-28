@@ -21,7 +21,7 @@ const AgeGate: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(to top, #37fe37, #13ca13)",
+        background: "linear-gradient(to top, #123522, #059669)",
         fontFamily: "Google Sans, sans-serif",
       }}
     >
@@ -57,11 +57,12 @@ const AgeGate: React.FC = () => {
           onClick={handleConfirm}
           style={{
             padding: "10px 20px",
-            background: "linear-gradient(to right, #13ca13, #37fe37)",
+            background: "linear-gradient(to right, #123522, #059669)",
             color: "white",
             border: "none",
             borderRadius: 5,
             cursor: "pointer",
+            fontWeight: 500
           }}
         >
           Tenho mais de 18 anos
