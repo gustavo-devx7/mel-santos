@@ -548,36 +548,26 @@ export default function Plataforma() {
         {/* LOGO — substitua pelo seu componente de logo */}
         <div style={{
           display: "flex", alignItems: "center", gap: "12px",
-          minWidth: "160px",
+          minWidth: "60px",
         }}>
           {/* ↓↓↓ INSIRA SUA LOGO AQUI ↓↓↓ */}
           <div style={{
-            width: "38px", height: "38px",
+            width: "90%", height: "48px",
             background: "linear-gradient(135deg, #059669, #065f46)",
             borderRadius: "10px",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: "18px",
             boxShadow: "0 0 16px rgba(5,150,105,0.4)",
           }}>
-            {/* <img src="/logo.svg" alt="Logo" style={{ width: "100%", height: "100%" }} /> */}
-            ✦
-          </div>
-          <span style={{
-            fontWeight: 800,
-            fontSize: "18px",
-            letterSpacing: "-0.03em",
-            background: "linear-gradient(135deg, #059669, #34d399)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}>
+             <img src="/images/mh white.png" alt="Logo" style={{ width: "100%", height: "60%" }} className="object-cover"/> 
             
-            Money Hot
-          </span>
+          </div>
+         
         </div>
 
         {/* Busca */}
         <div style={{
-          flex: 1, maxWidth: "420px",
+          flex: 1, maxWidth: "820px",
           position: "relative", display: "flex", alignItems: "center",
         }}>
           <span style={{ position: "absolute", left: "14px", color: textMuted }}>
@@ -605,11 +595,11 @@ export default function Plataforma() {
         </div>
 
         {/* Controles direita */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "26px" }}>
           {/* Toggle visualização */}
           <div style={{
             display: "flex", background: dark ? "#1f2937" : "#e5e7eb",
-            borderRadius: "10px", padding: "3px",
+            borderRadius: "10px", padding: "3px", 
           }}>
             {(["grade", "lista"] as const).map(v => (
               <button key={v} onClick={() => setGrid(v)} style={{
@@ -632,7 +622,7 @@ export default function Plataforma() {
             style={{
               background: dark ? "#1f2937" : "#e5e7eb",
               border: "none", borderRadius: "10px",
-              padding: "9px 12px",
+              //padding: "9px 12px",
               cursor: "pointer",
               color: dark ? "#f9fafb" : "#374151",
               display: "flex", alignItems: "center",
@@ -648,12 +638,14 @@ export default function Plataforma() {
       </header>
 
       {/* ── HERO BANNER ── */}
-      <div style={{
+      <div className="rounded-2xl" style={{
         background: "linear-gradient(135deg, #065f46 0%, #059669 50%, #034d38 100%)",
-        padding: "40px 32px",
+        padding: "20px 16px",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
+        width: "90%",
+        margin: "10px auto",
       }}>
         {/* Detalhe decorativo */}
         <div style={{
@@ -677,7 +669,7 @@ export default function Plataforma() {
           letterSpacing: "-0.03em",
           marginBottom: "10px",
         }}>
-          Conteúdo Exclusivo
+          Money Hot
         </h1>
         <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "15px", maxWidth: "500px", margin: "0 auto" }}>
           Fotos e vídeos das suas criadoras favoritas, disponíveis para você.
@@ -723,7 +715,7 @@ export default function Plataforma() {
         padding: "24px 32px 48px",
         display: "grid",
         gridTemplateColumns: grid === "grade"
-          ? "repeat(auto-fill, minmax(220px, 1fr))"
+          ? "repeat(auto-fill, minmax(120px, 1fr))"
           : "1fr",
         gap: grid === "grade" ? "20px" : "12px",
       }}>

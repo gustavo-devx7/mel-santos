@@ -22,7 +22,7 @@ node scripts/create-test-user.js
 
 Resultado:
 
-- Email: `teste@example.com`
+- Email: `teste@examplo.com`
 - Nome: `Usuário Teste`
 - Valor: R$ 299,00
 - Status: Pago
@@ -46,6 +46,8 @@ node scripts/add-test-user.js maria@example.com "Maria Silva" 99900
 
 # Apenas com nome
 node scripts/add-test-user.js pedro@example.com "Pedro Santos"
+
+node scripts/add-test-user.js teste@teste.com
 ```
 
 ## Usuários Padrão para Testes

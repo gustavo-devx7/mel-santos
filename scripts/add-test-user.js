@@ -61,7 +61,7 @@ async function addTestUser(email, name = 'Test User', amountCents = 29900) {
 const [, , email, name, amount] = process.argv
 if (!email) {
     console.log('Uso: node scripts/add-test-user.js <email> [nome] [valor_em_centavos]')
-    console.log('Exemplo: node scripts/add-test-user.js teste2@example.com "João Silva" 49900')
+    console.log('Exemplo: node scripts/add-test-user.js teste2@examplo.com "João Silva" 49900')
     process.exit(1)
 }
 

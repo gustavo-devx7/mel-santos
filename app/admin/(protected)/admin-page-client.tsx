@@ -12,7 +12,6 @@ function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // evita hydration mismatch
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
@@ -24,7 +23,6 @@ function ThemeToggle() {
       aria-label="Alternar tema"
       className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-[11px] tracking-wide text-white/75 transition hover:bg-white/14"
     >
-      {/* pill toggle */}
       <span
         className="relative inline-block h-[18px] w-8 flex-shrink-0 rounded-full transition-colors duration-300"
         style={{ background: isDark ? "#1e3027" : "rgba(255,255,255,0.2)" }}
@@ -53,87 +51,82 @@ export function AdminPageClient({
 }) {
   return (
     <main
-      className="min-h-screen px-4 py-6 sm:px-6 lg:px-10"
+      className="mainPageCliente"
       style={{ background: "var(--background)" }}
     >
-      <div className="mx-auto max-w-7xl space-y-5">
+      {/* ── wrapper centralizado ── */}
+      <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-6">
 
-        {/* ── header ── */}
-        <section
-          className="overflow-hidden rounded-[28px] p-6 sm:p-8"
-          style={{
-            background: "linear-gradient(135deg, #0f1b14 0%, #101814 100%)",
-            boxShadow: "0 24px 64px rgba(15,27,20,0.22)",
-            position: "relative",
-          }}
-        >
-          {/* glow sutil */}
+          {/* ── header card ── */}
           <div
-            aria-hidden
+            className="relative overflow-hidden rounded-2xl"
             style={{
-              position: "absolute",
-              top: -60,
-              left: -60,
-              width: 260,
-              height: 260,
-              background: "radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 70%)",
-              pointerEvents: "none",
+              background: "linear-gradient(135deg, #0f1b14 0%, #101814 100%)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
             }}
-          />
+          >
+            {/* glow decorativo */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%)",
+              }}
+            />
 
-          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="space-y-3">
-              <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-emerald-200">
+            {/* ── topbar: badge + controles ── */}
+            <div className="relative flex items-center justify-between border-b border-white/[0.07] px-6 py-3 sm:px-8">
+              <span className="inline-flex items-center rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-emerald-300">
                 Money Hot Admin
               </span>
-              <div className="space-y-1.5">
-                <h1 className="text-3xl font-normal tracking-tight text-white sm:text-4xl">
-                  Receita, clientes e recorrência em um único painel.
-                </h1>
-                <p className="max-w-2xl text-sm leading-6 text-emerald-50/65 sm:text-base">
-                  Dados agregados por e-mail com leitura rápida da base, status de acesso e histórico essencial de pagamentos.
-                </p>
+
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <form action={logoutAdmin}>
+                  <button
+                    type="submit"
+                    className="inline-flex h-8 items-center justify-center rounded-lg border border-white/10 bg-white/6 px-4 text-xs font-medium text-white/80 transition hover:bg-white/12 hover:text-white"
+                  >
+                    Sair
+                  </button>
+                </form>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 lg:flex-shrink-0">
-              <ThemeToggle />
-              <form action={logoutAdmin}>
-                <button
-                  type="submit"
-                  className="inline-flex h-10 items-center justify-center rounded-2xl border border-white/12 bg-white/8 px-5 text-sm font-medium text-white transition hover:bg-white/14"
-                >
-                  Sair
-                </button>
-              </form>
+            {/* ── headline ── */}
+            <div className="relative px-6 py-7 sm:px-8">
+              <h1 className="text-2xl font-light tracking-tight text-white sm:text-[1.75rem] sm:leading-snug">
+                Receita, clientes e recorrência em um único painel.
+              </h1>
+              <p className="mt-2 text-sm leading-relaxed text-white/45">
+                Dados agregados por e-mail · leitura rápida da base · status de acesso · histórico de pagamentos.
+              </p>
             </div>
           </div>
-        </section>
 
-        {/* ── error banner ── */}
-        {loadError && (
-          <section
-            className="rounded-[22px] border p-6"
-            style={{
-              background: "var(--muted)",
-              borderColor: "#fde68a",
-              color: "var(--foreground)",
-            }}
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-amber-600">
-              Falha ao carregar dados
-            </p>
-            <h2 className="mt-1.5 text-xl font-normal" style={{ color: "var(--foreground)" }}>
-              O painel abriu, mas a base não respondeu.
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6" style={{ color: "var(--muted-foreground)" }}>
-              {loadError}
-            </p>
-          </section>
-        )}
+          {/* ── error banner ── */}
+          {loadError && (
+            <div
+              className="rounded-2xl border border-amber-300/40 px-6 py-5"
+              style={{ background: "var(--muted)" }}
+            >
+              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-500">
+                Falha ao carregar dados
+              </p>
+              <h2 className="mt-1 text-lg font-normal" style={{ color: "var(--foreground)" }}>
+                O painel abriu, mas a base não respondeu.
+              </h2>
+              <p className="mt-1.5 text-sm leading-relaxed" style={{ color: "var(--muted-foreground)" }}>
+                {loadError}
+              </p>
+            </div>
+          )}
 
-        {/* ── dashboard ── */}
-        <AdminDashboard data={dashboardData} />
+          {/* ── dashboard ── */}
+          <AdminDashboard data={dashboardData} />
+
+        </div>
       </div>
     </main>
   )

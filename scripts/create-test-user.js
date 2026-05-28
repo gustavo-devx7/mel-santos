@@ -29,7 +29,7 @@ async function createTestUser() {
 
     try {
         const testUser = {
-            email: 'teste@example.com',
+            email: 'teste@examplo.com',
             name: 'Usuário Teste',
             transaction_id: 'test_txn_' + Date.now(),
             status: 'paid',

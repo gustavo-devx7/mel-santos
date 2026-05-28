@@ -270,3 +270,8 @@ body {
 body {
   padding-top: 0;
 }
+
+
+.mainPageCliente{
+  gap: 10;
+}
