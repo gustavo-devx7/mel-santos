@@ -155,7 +155,7 @@ const Content: React.FC = () => {
                         <h3>Assinaturas</h3>
                     </div>
                     <div className="card-content">
-                        <p className="badge">
+                        <p className="badge !mb-4">
                             MAIS POPULAR 🔥🔥
                         </p>
 
@@ -163,13 +163,13 @@ const Content: React.FC = () => {
                             className="subscription-button primary-button pulse"
                             onClick={() => mostraDivPix(19.9)}
                         >
-                            <b>7 DIAS</b>
+                            <div className="button-left">
+                                    <span>1 ANO</span>
+                                    <span className="badge">+ Acessado</span>
+                                </div>
                             <span className="price">R$ 19,90</span>
                         </button>
-                        <p className="badge" >
-                            ACESSO SEMANAL. RENOVE A CADA 7 DIAS PARA CONTINUAR.
-                        </p>
-
+                       
                         <div className="promotions">
                             <div className="promotions-header">
                                 <h4>Promoções</h4>
@@ -194,7 +194,7 @@ const Content: React.FC = () => {
 
                             {/*  <a href={check19} className="subscription-link">*/}
                             <button onClick={() => mostraDivPix(69.9)}
-                                className="subscription-button outline-button">
+                                className="subscription-button outline-button translate-y-3">
                                 <div className="button-left">
                                     <span>1 ANO</span>
                                     <span className="badge">Melhor oferta</span>
