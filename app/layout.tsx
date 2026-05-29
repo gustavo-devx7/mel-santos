@@ -8,7 +8,7 @@ import './pages/pages.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
-  title: 'Mel santos',
+  title: 'Money Hot',
   description: 'Clique e venha ver a surpresa que preparei para você!',
 }
 
@@ -36,33 +36,37 @@ export default function RootLayout({
           <Analytics />
         </ThemeProvider>
 
-        {/* Pixel UTMify */}
-        <Script
-          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          data-utmify-prevent-xcod-sck
-          data-utmify-prevent-subids
-          strategy="afterInteractive"
-        />
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            {/* Pixel UTMify */}
+            <Script
+              src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+              data-utmify-prevent-xcod-sck
+              data-utmify-prevent-subids
+              strategy="afterInteractive"
+            />
 
-        {/* Pixel Facebook UTMify */}
-        <Script
-          id="utmify-pixel"
-          strategy="afterInteractive"
-        >
-          {`
-            window.pixelId = "6a188c0cb627b7f5c25cfc59";
+            {/* Pixel Facebook UTMify */}
+            <Script
+              id="utmify-pixel"
+              strategy="afterInteractive"
+            >
+              {`
+                window.pixelId = "6a188c0cb627b7f5c25cfc59";
 
-            var a = document.createElement("script");
-            a.setAttribute("async", "");
-            a.setAttribute("defer", "");
-            a.setAttribute(
-              "src",
-              "https://cdn.utmify.com.br/scripts/pixel/pixel.js"
-            );
+                var a = document.createElement("script");
+                a.setAttribute("async", "");
+                a.setAttribute("defer", "");
+                a.setAttribute(
+                  "src",
+                  "https://cdn.utmify.com.br/scripts/pixel/pixel.js"
+                );
 
-            document.head.appendChild(a);
-          `}
-        </Script>
+                document.head.appendChild(a);
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )

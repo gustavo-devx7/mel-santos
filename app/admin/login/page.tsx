@@ -7,12 +7,13 @@ export const dynamic = "force-dynamic"
 export default async function AdminLoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>
+  searchParams: Promise<{ error?: string | string[] }>
 }) {
   const session = await getAdminSession()
   if (session) redirect("/admin")
 
-  const { error } = await searchParams
+  const { error: rawError } = await searchParams
+  const error = Array.isArray(rawError) ? rawError[0] : rawError
 
   return (
     <main
