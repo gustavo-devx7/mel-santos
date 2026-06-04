@@ -1,13 +1,18 @@
-'use client'
+"use client"
 
-import React, { useState } from "react";
-import PostCard from "@/components/Postcard";
-import PopUpTempo from "@/components/PopUpTempo";
-import Pix from "@/app/pages/pix/pagePix";
+/* eslint-disable @next/next/no-img-element */
+import { useEffect, useMemo, useRef, useState } from "react"
+import "./conteudo.css"
 
+type Post = {
+    video: string
+    style: {
+        scale: string
+        objectPosition: string
+    }
+}
 
-
-const posts = [
+const posts: Post[] = [
     { video: "/media/c14.mp4", style: { scale: "1", objectPosition: "50% 40%" } },
     { video: "/media/c15.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
     { video: "/media/c16.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
@@ -15,258 +20,590 @@ const posts = [
 ];
 
 
-//const check9 = "https://seguropagamentos.com.br/mel_santos9";
-//const check19 = "https://seguropagamentos.com.br/mel_santos";
-
-const Content: React.FC = () => {
-    const getFormattedDate = (daysAhead: number = 0): string => {
-        const today = new Date();
-        today.setDate(today.getDate() + daysAhead);
-        const dd = String(today.getDate()).padStart(2, "0");
-        const mm = String(today.getMonth() + 1).padStart(2, "0");
-        const yyyy = today.getFullYear();
-        return `${dd}/${mm}/${yyyy}`;
-    };
-
-    const promoDate = getFormattedDate(0);
-
-    const [pixVisible, setPixVisible] = useState(false);
-    const [valorSelecionado, setValorSelecionado] = useState<number | null>(null);
 
 
-    function mostraDivPix(valor: number) {
-        setValorSelecionado(valor);
-        setPixVisible(true);
+export default function PrivacyPage() {
+    const [bioExpanded, setBioExpanded] = useState(false)
+    const [popupActive, setPopupActive] = useState(false)
+    const [promotionsOpen, setPromotionsOpen] = useState(true)
+    const promoDate = useMemo(() => {
+        const today = new Date()
+        const dd = String(today.getDate()).padStart(2, "0")
+        const mm = String(today.getMonth() + 1).padStart(2, "0")
+        const yyyy = today.getFullYear()
+        return `${dd}/${mm}/${yyyy}`
+    }, [])
+
+    // FAQ state
+    const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+    // PIX Modal states
+    const [pixModalOpen, setPixModalOpen] = useState(false)
+    const [pixStep, setPixStep] = useState<"form" | "loading" | "pix" | "success" | "error">("form")
+    const [pixPlanLabel, setPixPlanLabel] = useState("")
+    const [pixAmount, setPixAmount] = useState(0)
+    const [pixFormName, setPixFormName] = useState("")
+    const [pixFormEmail, setPixFormEmail] = useState("")
+    const [pixFormNameError, setPixFormNameError] = useState("")
+    const [pixFormEmailError, setPixFormEmailError] = useState("")
+    const [pixCode, setPixCode] = useState("")
+    const [pixQrUrl, setPixQrUrl] = useState("")
+    const [pixTransactionId, setPixTransactionId] = useState("")
+    const [pixTimer, setPixTimer] = useState("15:00")
+    const [pixErrorMsg, setPixErrorMsg] = useState("")
+    const pixCountdownRef = useRef<number | null>(null)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (window.innerWidth <= 768) {
+                setPopupActive(true)
+            }
+        }, 20000)
+
+        return () => clearTimeout(timer)
+    }, [])
+
+    const abrirPixDireto = (planLabel: string, amount: number) => {
+        setPixPlanLabel(planLabel)
+        setPixAmount(amount)
+        setPixFormName("")
+        setPixFormEmail("")
+        setPixFormNameError("")
+        setPixFormEmailError("")
+        setPixStep("form")
+        setPixModalOpen(true)
     }
-    return (
-        <>
-            <div aria-hidden="true" className="h-[50px]" />
 
-            {/* HEADER */}
-            <header className="header">
-                <div className="container header-container">
-                    <div className="logo">
-                        <img
-                            src="/images/money hot black.png"
-                            alt="Logo"
-                            className="logo-image w-[80%]"
-                        />
+    const confirmarDadosEGerarPix = () => {
+        let ok = true
+        setPixFormNameError("")
+        setPixFormEmailError("")
+
+        if (!pixFormName || pixFormName.length < 3 || pixFormName.length > 100) {
+            setPixFormNameError("Informe seu nome completo.")
+            ok = false
+        }
+
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!pixFormEmail || !emailRe.test(pixFormEmail) || pixFormEmail.length > 255) {
+            setPixFormEmailError("Informe um e-mail válido.")
+            ok = false
+        }
+
+        if (!ok) return
+
+        setPixStep("loading")
+        setPixErrorMsg("")
+
+        fetch("/api/pix/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: pixFormName.trim(),
+                email: pixFormEmail.trim(),
+                amount: pixAmount,
+            }),
+        })
+            .then(async (response) => {
+                const data = await response.json()
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Erro ao gerar PIX")
+                }
+
+                if (!data.copyPaste || (!data.qrCode && !data.qrCodeBase64)) {
+                    throw new Error("Resposta inválida do gateway PIX")
+                }
+
+                setPixCode(data.copyPaste)
+                setPixTransactionId(data.transactionId || "")
+                setPixQrUrl(
+                    data.qrCodeBase64
+                        ? data.qrCodeBase64.startsWith("data:")
+                            ? data.qrCodeBase64
+                            : `data:image/png;base64,${data.qrCodeBase64}`
+                        : data.qrCode
+                )
+                setPixStep("pix")
+
+                let remaining = 15 * 60
+                pixCountdownRef.current = window.setInterval(() => {
+                    remaining--
+                    const m = Math.floor(remaining / 60)
+                    const s = remaining % 60
+                    setPixTimer(`${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`)
+                    if (remaining <= 0 && pixCountdownRef.current) {
+                        window.clearInterval(pixCountdownRef.current)
+                        pixCountdownRef.current = null
+                    }
+                }, 1000)
+            })
+            .catch((error) => {
+                setPixErrorMsg(error instanceof Error ? error.message : "Erro ao gerar PIX")
+                setPixStep("error")
+            })
+    }
+
+    const copiarPix = () => {
+        navigator.clipboard.writeText(pixCode)
+    }
+
+    useEffect(() => {
+        if (!pixTransactionId || pixStep !== "pix") return
+
+        const checkStatus = async () => {
+            try {
+                const response = await fetch(`/api/pix/status/${pixTransactionId}`)
+                const data = await response.json()
+
+                if (response.ok && data.isPaid) {
+                    setPixStep("success")
+                    window.clearInterval(interval)
+                }
+            } catch (error) {
+                console.error("Erro ao verificar status do PIX:", error)
+            }
+        }
+
+        const interval = window.setInterval(checkStatus, 5000)
+        checkStatus()
+
+        return () => {
+            window.clearInterval(interval)
+        }
+    }, [pixTransactionId, pixStep])
+
+    const fecharPixModal = () => {
+        setPixModalOpen(false)
+        setPixStep("form")
+        setPixCode("")
+        setPixQrUrl("")
+        setPixTransactionId("")
+        setPixTimer("15:00")
+        setPixErrorMsg("")
+
+        if (pixCountdownRef.current) {
+            window.clearInterval(pixCountdownRef.current)
+            pixCountdownRef.current = null
+        }
+    }
+
+    const faqItems = [
+        { q: "É sigiloso? Vai aparecer na fatura?", a: "Sim, é sigiloso. Cobrança discreta, sem nomes chamativos. Seus dados ficam criptografados." },
+        { q: "Quando tenho acesso depois do pagamento?", a: "Imediato. Pagamento aprovado = liberação em até 10s e e-mail contendo o login de acesso." },
+        { q: "Posso cancelar quando quiser? A assinatura renova?", a: "Sim. Você pode cancelar a renovação automática pela área do assinante a qualquer momento." },
+        { q: "Tem reembolso?", a: "Sim. Reembolso de 7 dias sem burocracia. Se não curtir, devolvemos 100%." },
+        { q: "Como funciona a \"Chat telegram\"?", a: "Basta mandar uma mensagem no chat do produtor e combinar." },
+        { q: "Posso pedir conteúdo personalizado?", a: "Sim! Solicitações podem ser feitas no chat do produtor, com o conteúdo desejado." },
+    ]
+
+    return (
+        <div className="privacy-container">
+            {/* Header */}
+            <header>
+                <nav className="nav">
+                    <div className="top-bar">
+                        <div className="top-bar-content">
+                            <div className="promo-badge">
+                                ESSA PROMOÇÃO É VÁLIDA ATÉ {promoDate}
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div className="nav-container">
+                        <div className="logo-wrapper">
+                            <img src="/images/money hot black.png" alt="" />
+                        </div>
+                    </div>
+                </nav>
             </header>
 
-            {/* PROMO */}
-            <div className="promo-banner">
-                ESSA PROMOÇÃO É VÁLIDA ATÉ {promoDate}
-            </div>
-
-            <main className="container flex items-center flex-col">
-
-                <div className="aguarde text-center">
-                    AGUARDE, AS PRÉVIAS ESTÃO SENDO CARREGADAS...
-                </div>
-
-                {/* PROFILE */}
-                <div className="profile-section w-[99%]" style={{ marginBottom: 50 }}>
-                    <div className="banner">
-                        <video
-                            src="/media/banner.mp4"
-                            autoPlay
-                            muted
-                            loop
-                            className="banner-image blur-[1px]"
-                            style={{ objectPosition: "20% 60%", transform: "scale(1.4)" }}
-                        />
-
-                        <div className="banner-overlay"></div>
-
-                        <div className="banner-content">
-                            <h2>Mel Santos 💋</h2>
-
-                            <div className="banner-stats">
-                                <div className="stat">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-image-icon lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg>
-                                    <span>401</span>
+            {/* Main Content */}
+            <main className="main-content">
+                <div className="container">
+                    <div className="content-wrapper">
+                        {/* Cover Section */}
+                        <div className="cover-section">
+                            <div className="cover-image">
+                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" />
+                                <div className="cover-stats">
+                                    <span>📷 354</span>
+                                    <span>🎥 148</span>
+                                    <span>❤️ 20.2K</span>
                                 </div>
+                            </div>
 
-                                <div className="stat">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-video-icon lucide-video"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg>
-                                    <span>438</span>
+                            {/* Profile Info */}
+                            <div className="profile-info">
+                                <div className="avatar">
+                                    <img src="/images/perfilModelo.jpg" alt="foto da modelo" />
                                 </div>
-
-                                <div className="stat">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart-icon lucide-heart"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg>
-                                    <span>229K</span>
+                                <div className="profile-text">
+                                    <div className="profile-name">
+                                        Mel Santos
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
+                                            <path fill="#065f46" d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
+                                        </svg>
+                                    </div>
+                                    <div className="profile-handle">@melsantos</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* FOTO PERFIL */}
-                    <div
-                        className="profile-image-container"
-                        style={{ width: 120, height: 120 }}
-                    >
-                        <img
-                            src="/images/perfilModelo.jpg"
-                            alt="perfil"
-                            className="profile-image"
-                            style={{ objectPosition: "top", transform: "scale(1.3)" }}
-                        />
-                    </div>
-                </div>
-
-                {/* CARD PERFIL */}
-                <div className="card profile-card">
-                    <div className="card-content">
-                        <span>Mel Santos</span>
-
-                        <div className="w-[18px] h-[18px]">
-                            <svg className="svg-inline--fa fa-badge-check w-4" aria-hidden="true" focusable="false" data-prefix="fal"
-                                data-icon="badge-check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <path className="" fill="rgb(253, 115, 80)"
-                                    d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM256 0c-36.1 0-68 18.1-87.1 45.6c-33-6-68.3 3.8-93.9 29.4s-35.3 60.9-29.4 93.9C18.1 188 0 219.9 0 256s18.1 68 45.6 87.1c-6 33 3.8 68.3 29.4 93.9s60.9 35.3 93.9 29.4C188 493.9 219.9 512 256 512s68-18.1 87.1-45.6c33 6 68.3-3.8 93.9-29.4s35.3-60.9 29.4-93.9C493.9 324 512 292.1 512 256s-18.1-68-45.6-87.1c6-33-3.8-68.3-29.4-93.9s-60.9-35.3-93.9-29.4C324 18.1 292.1 0 256 0zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z">
-                                </path>
-                            </svg>
-                        </div>
-
-                        <p className="username">@mel.santos_7</p>
-
-                        <p className="bio">
-                            Meu amorzinho, você não vai ficar de fora né? Tô agora te esperando pra te mostrar minha bucetinha toda aberta pra você.
-                            <br />
-                            Vem me fazer gozar, clique em qualquer botão abaixo
-                            <br />
-                        </p>
-                    </div>
-                </div>
-
-
-
-
-
-                {/* opcoes de assinaruta */}
-                <div className="card">
-                    <div className="card-header">
-                        <h3>Assinaturas</h3>
-                    </div>
-                    <div className="card-content">
-                        <p className="badge !mb-4">
-                            MAIS POPULAR 🔥🔥
-                        </p>
-
-                        <button
-                            className="subscription-button primary-button pulse"
-                            onClick={() => mostraDivPix(19.9)}
-                        >
-                            <div className="button-left">
-                                    <span>1 ANO</span>
-                                    <span className="badge">+ Acessado</span>
-                                </div>
-                            <span className="price">R$ 19,90</span>
-                        </button>
-                       
-                        <div className="promotions">
-                            <div className="promotions-header">
-                                <h4>Promoções</h4>
-                                <svg name="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M19 9l-7 7-7-7"></path>
-                                </svg>
+                        {/* Profile Bio */}
+                        <div className="bio-section">
+                            <div className="bio-container">
+                                <p className={`bio-text ${bioExpanded ? 'expanded' : ''}`}>
+                                    🔥 Mel Santos – Vazamento Exclusivo no Privacy 🔥{"\n"}
+                                    Conteúdo premium liberado por um valor MUITO abaixo do habitual.{"\n"}
+                                    Corpo escultural entregue sem filtros:{"\n"}
+                                    💦 Boquetes profundos e molhados que vão até o limite{"\n"}
+                                    🍑 Sentadas intensas, reboladas que hipnotizam{"\n"}
+                                    🔞 Gemidos reais, orgasmos sem cortes, close-ups explícitos{"\n"}
+                                    Material que era restrito aos assinantes mais fiéis… agora acessível por tempo limitado e por um preço que não vai se repetir.{"\n"}
+                                    Não perca a chance de ver a Vivi se entregando de verdade.{"\n"}
+                                    👉 Entre agora e garanta o seu antes que volte ao valor original.{"\n"}
+                                    😈 Quantidade limitada • Acesso imediato • 100% sem censura
+                                </p>
+                                <button onClick={() => setBioExpanded(!bioExpanded)} className="bio-toggle">
+                                    {bioExpanded ? 'Mostrar menos' : 'Mostrar mais'}
+                                </button>
                             </div>
 
-
-                            {/*  <a href={check19} className="subscription-link">*/}
-                            <button onClick={() => mostraDivPix(29.9)}
-                                className="subscription-button outline-button">
-                                <div className="button-left">
-                                    <span>3 Meses</span>
-                                    <span className="badge">Economia</span>
+                            {/* Pricing Panel */}
+                            <div className="pricing-panel">
+                                <h3 className="pricing-title">Assinaturas</h3>
+                                <div className="pricing-badges">
+                                    <span className="badge-fire">VEJA TUDO AGORA 🔥</span>
+                                    <span className="badge-promo">Promocional</span>
                                 </div>
-                                <span className="price highlight">R$ 29,90</span>
-                            </button>
-                            {/*   </a> */}
 
+                                <button onClick={() => abrirPixDireto('+ Vendido', 19.90)} className="btn-primary">
+                                    <span className="btn-label">+ Vendido</span>
+                                    <span className="btn-price">R$ 19,90 →</span>
+                                </button>
 
-                            {/*  <a href={check19} className="subscription-link">*/}
-                            <button onClick={() => mostraDivPix(69.9)}
-                                className="subscription-button outline-button translate-y-3">
-                                <div className="button-left">
-                                    <span>1 ANO</span>
-                                    <span className="badge">Melhor oferta</span>
+                                <div className="offer-badge">NÃO PERCA ESSA OFERTA!</div>
+
+                                <div className="payment-info">
+                                    <span>🔒 Pagamento 100% seguro</span>
+                                    <span>•</span>
+                                    <span>⚡ Acesso imediato</span>
                                 </div>
-                                <span className="price highlight">R$ 69,90</span>
-                            </button>
-                            {/*  </a> */}
 
+                                {/* Promotions */}
+                                <div className="promotions-section">
+                                    <div onClick={() => setPromotionsOpen(!promotionsOpen)} className="promotions-header">
+                                        <h4>Promoções</h4>
+                                        <span className={`arrow ${promotionsOpen ? 'open' : ''}`}>⌄</span>
+                                    </div>
 
+                                    {promotionsOpen && (
+                                        <>
+                                            <button onClick={() => abrirPixDireto('Popular', 29.90)} className="btn-secondary popular">
+                                                <span className="btn-secondary-left">
+                                                    👑 <span>Popular</span>
+                                                    <span className="badge-popular">Mais popular 🔥</span>
+                                                </span>
+                                                <span className="btn-secondary-price">R$ 29,90</span>
+                                            </button>
+
+                                            <button onClick={() => abrirPixDireto('Max', 34.90)} className="btn-secondary">
+                                                <span className="btn-secondary-left">
+                                                    <span>Max</span>
+                                                    <span className="badge-offer">Melhor oferta</span>
+                                                </span>
+                                                <span className="btn-secondary-price">R$ 34,90</span>
+                                            </button>
+
+                                            <button onClick={() => abrirPixDireto('Exclusivo', 69.90)} className="btn-secondary">
+                                                <span className="btn-secondary-left">
+                                                    <span>Exclusivo</span>
+                                                    <span className="badge-exclusive">Exclusivo</span>
+                                                </span>
+                                                <span className="btn-secondary-price">R$ 69,90</span>
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Content Toggle */}
+                            <div className="content-toggle">
+                                <button className="toggle-btn"><span className="toggle-count">502</span> Posts</button>
+                                <span className="toggle-dot">•</span>
+                                <button className="toggle-btn active"><span className="toggle-count">148</span> Videos</button>
+                                <span className="toggle-dot">•</span>
+                                <button className="toggle-btn"><span className="toggle-count">354</span> Fotos</button>
+                            </div>
+
+                            {/* Feed Gallery */}
+                            <section className="feed-gallery"
+                                onClick={() => abrirPixDireto('+ Vendido', 19.90)} >
+                                <div className="feed-grid">
+                                    {posts.map((post, i) => (
+                                        <article key={i} className="feed-card">
+                                            <header className="feed-card-header">
+                                                <div className="feed-avatar">
+                                                    <img src="/images/perfilModelo.jpg" alt="foto da modelo" className="fotoModelo" />
+                                                </div>
+                                                <div className="feed-user-info">
+                                                    <div className="feed-username">Mel Santos</div>
+                                                    <div className="feed-handle">@melsantos</div>
+                                                </div>
+                                            </header>
+                                            <div className="feed-media">
+                                                <video
+                                                    src={post.video}
+                                                    className="feed-video"
+                                                    style={{
+                                                        transform: `scale(${(post.style as any)?.scale ?? 1})`,
+                                                        objectPosition: (post.style as any)?.objectPosition ?? "50% 50%",
+                                                        objectFit: "cover",
+                                                        filter: "blur(6px)",
+                                                    }}
+                                                    playsInline
+                                                    muted
+                                                    loop
+                                                    autoPlay
+                                                />
+
+                                                <div className="feed-lock">🔒</div>
+                                                <div className="feed-stats">
+                                                    <span>❤️ {67.4 + i * 10}K</span>
+                                                    <span>💬 {1.9 + i * 0.5}K</span>
+                                                </div>
+                                            </div>
+                                            <footer className="feed-card-footer">
+                                                <span>🤍</span>
+                                                <span>💬</span>
+                                                <span>🔖</span>
+                                            </footer>
+                                        </article>
+                                    ))}
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
 
-
-
-                {/* aba de videos */}
-
-                <div onClick={() => mostraDivPix(19.9)} className="grid grid-cols-2 gap-2">
-                    {posts.map((post, i) => (
-                        <PostCard
-                            key={i}
-                            perfil="/images/perfilModelo.jpg"
-                            video={post.video}
-                            style={post.style}
-                            onClick={() => mostraDivPix(19.9)}
-                        />
-                    ))}
-
+                {/* FAQ Section */}
+                <div className="faq-section">
+                    <div className="faq-container">
+                        <div className="faq-content">
+                            <h2 className="faq-title">Perguntas Frequentes</h2>
+                            <div className="faq-list">
+                                {faqItems.map((item, index) => (
+                                    <div key={index} className="faq-item">
+                                        <button onClick={() => setOpenFaq(openFaq === index ? null : index)} className="faq-question">
+                                            <span className="faq-icon">
+                                                <span className="faq-icon-h" />
+                                                <span className={`faq-icon-v ${openFaq === index ? 'hidden' : ''}`} />
+                                            </span>
+                                            {item.q}
+                                        </button>
+                                        <div className={`faq-answer ${openFaq === index ? 'open' : ''}`}>
+                                            {item.a}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <a onClick={() => mostraDivPix(19.9)} className="subscription-link">
-                    <button className="subscription-button primary-button">
-                        <b>LIBERE 7 DIAS POR APENAS <strong>R$ 19,90</strong></b>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none">
-                            <path d="M8 5L15.57 11.6237C15.7976 11.8229 15.7976 12.1771 15.57 12.3763L8 19" stroke="#fff"
-                                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
-                        </svg>
+                {/* Footer CTA */}
+                <div className="footer-cta">
+                    <button onClick={() => abrirPixDireto('+ Vendido', 19.90)} className="btn-primary">
+                        <span className="btn-label">Veja tudo por apenas</span>
+                        <span className="btn-price">R$ 19,90 →</span>
                     </button>
-                </a>
-
-
-                <div className="htmltempo">
-
-                    <PopUpTempo></PopUpTempo>
-
                 </div>
 
+                {/* Footer Links */}
+                <p className="footer-links">
+                    <a href="#">Termos de Uso</a>
+                    <span>•</span>
+                    <a href="#">Política de Privacidade</a>
+                </p>
+            </main>
 
-                <div
-                    id="divPix"
-                    className={`${pixVisible ? "flex" : "hidden"} fixed inset-0 z-50 items-center justify-center p-4`}
-                    onClick={() => setPixVisible(false)}
-                >
-                    <div className="absolute inset-0 bg-black/40" />
-                    <div
-                        className="relative w-[90%] max-w-lg bg-white rounded-3xl shadow-xl p-6"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            onClick={() => setPixVisible(false)}
-                            className="absolute right-3 top-3 z-10 rounded-full p-2 text-white shadow-lg"
-                            aria-label="Fechar popup"
-                        >
-                            ✕
-                        </button>
-                        <div className="space-y-4">
-                            {pixVisible && <Pix valor={valorSelecionado} />}
+            {/* Popup Overlay (Mobile) */}
+            {popupActive && (
+                <div onClick={(e) => e.target === e.currentTarget && setPopupActive(false)} className="popup-overlay">
+                    <div className="popup-content">
+                        <button onClick={() => setPopupActive(false)} className="popup-close">✕</button>
+                        <div className="popup-cover">
+                            <div className="cover-image">
+                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" />
+                            </div>
+                            <div className="popup-profile">
+                                <div className="popup-avatar">
+                                    <img src="/images/perfilModelo.jpg" alt="foto modelo" />
+                                </div>
+                                <div className="popup-user">
+                                    <div className="popup-name">
+                                        Mel Santos
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
+                                            <path fill="#065f46" d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
+                                        </svg>
+                                    </div>
+                                    <div className="popup-handle">@melsantos</div>
+                                </div>
+                            </div>
+                            <div className="popup-stats">
+                                <span>📷 354</span>
+                                <span>🎥 148</span>
+                                <span>❤️ 20.2K</span>
+                            </div>
+                        </div>
+
+                        <div className="popup-body">
+                            <div className="popup-inner">
+                                <h2 className="popup-title">ASSINE AGORA E OBTENHA ESTES BENEFÍCIOS</h2>
+                            </div>
+
+                            <div className="popup-inner">
+                                {[
+                                    'Acesso a todos conteúdos exclusivos',
+                                    'Chat ao vivo com a Mel Santos',
+                                    'Video chamada com a Mel Santos',
+                                    'E muito mais...',
+                                ].map((item, index) => (
+                                    <div key={index} className="popup-benefit">
+                                        <span className="popup-check">✓</span>
+                                        <span>{item}</span>
+                                    </div>
+                                ))}
+
+                                <div className="popup-surprise">
+                                    <h3>Presente surpresa para os +50 primeiros assinantes!</h3>
+                                </div>
+
+                                <button
+                                    onClick={() => {
+                                        setPopupActive(false)
+                                        abrirPixDireto('+ Vendido', 19.90)
+                                    }}
+                                    className="popup-cta"
+                                >
+                                    <span>Assine agora</span>
+                                    <span>por R$ 19,90</span>
+                                </button>
+
+                                <div className="popup-security">
+                                    <div className="popup-security-item">
+                                        <span>🔒</span>
+                                        <span>Pagamento 100% Seguro</span>
+                                    </div>
+                                    <div className="popup-security-item">
+                                        <span>🛡️</span>
+                                        <span>Dados Protegidos</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            )
+            }
 
+            {/* PIX Modal */}
+            {
+                pixModalOpen && (
+                    <div onClick={(e) => e.target === e.currentTarget && fecharPixModal()} className="pix-overlay">
+                        <div className="pix-modal">
+                            <div className="cover-image">
+                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" />
+                            </div>
+                            <div className="pix-header">
+                                <div>
+                                    <div className="pix-header-label">Pagamento via Pix</div>
+                                    <div className="pix-header-amount">{pixPlanLabel} – R$ {pixAmount.toFixed(2).replace('.', ',')}</div>
+                                </div>
+                                <button onClick={fecharPixModal} className="pix-close">✕</button>
+                            </div>
 
+                            {pixStep === "form" && (
+                                <div className="pix-form">
+                                    <p className="pix-form-desc">Confirme seus dados para gerar o PIX 🔒</p>
+                                    <div className="pix-field">
+                                        <label>Nome completo</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Seu nome completo"
+                                            maxLength={100}
+                                            value={pixFormName}
+                                            onChange={(e) => setPixFormName(e.target.value)}
+                                            className={pixFormNameError ? 'error' : ''}
+                                        />
+                                        {pixFormNameError && <span className="pix-error">{pixFormNameError}</span>}
+                                    </div>
+                                    <div className="pix-field">
+                                        <label>E-mail</label>
+                                        <input
+                                            type="email"
+                                            placeholder="seu@email.com"
+                                            maxLength={255}
+                                            value={pixFormEmail}
+                                            onChange={(e) => setPixFormEmail(e.target.value)}
+                                            className={pixFormEmailError ? 'error' : ''}
+                                        />
+                                        {pixFormEmailError && <span className="pix-error">{pixFormEmailError}</span>}
+                                    </div>
+                                    <button onClick={confirmarDadosEGerarPix} className="pix-submit">Gerar PIX →</button>
+                                    <p className="pix-disclaimer">🔒 Dados usados apenas para emissão do pagamento</p>
+                                </div>
+                            )}
 
-            </main>
-        </>
-    );
-};
+                            {pixStep === "loading" && (
+                                <div className="pix-loading">
+                                    <div className="pix-spinner" />
+                                    <p className="pix-loading-title">Gerando seu PIX...</p>
+                                    <p className="pix-loading-sub">Aguarde um instante</p>
+                                </div>
+                            )}
 
-export default Content;
+                            {pixStep === "pix" && (
+                                <div className="pix-content">
+                                    <p className="pix-scan-label">Escaneie o QR Code para pagar</p>
+                                    <div className="pix-qr-wrapper">
+                                        <img src={pixQrUrl} alt="QR Code PIX" className="pix-qr" />
+                                    </div>
+                                    <div className="pix-code-box">
+                                        <span className="pix-code">{pixCode}</span>
+                                        <button onClick={copiarPix} className="pix-copy">📋 Copiar</button>
+                                    </div>
+                                    <div className="pix-waiting">
+                                        <div className="pix-blink" />
+                                        <span>Aguardando pagamento...</span>
+                                    </div>
+                                    <p className="pix-expiry">QR Code expira em <strong>{pixTimer}</strong></p>
+                                </div>
+                            )}
+
+                            {pixStep === "success" && (
+                                <div className="pix-success">
+                                    <div className="pix-success-icon">🎉</div>
+                                    <h3>Pagamento confirmado!</h3>
+                                    <p>Seu acesso foi liberado. Verifique seu e-mail para o login.</p>
+                                    <button onClick={fecharPixModal} className="pix-success-btn">Fechar</button>
+                                </div>
+                            )}
+
+                            {pixStep === "error" && (
+                                <div className="pix-error-state">
+                                    <div className="pix-error-icon">⚠️</div>
+                                    <p>{pixErrorMsg || 'Erro ao gerar PIX. Tente novamente.'}</p>
+                                    <button onClick={fecharPixModal} className="pix-error-btn">Fechar</button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )
+            }
+        </div >
+    )
+}
