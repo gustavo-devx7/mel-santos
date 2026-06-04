@@ -19,7 +19,7 @@ export function PaymentConfirmationEmail({
                 <tr>
                   <td align="center">
                     <img
-                      src="https://money-hot.vercel.app/images/money hot black.png"
+                      src="https://money-hot.vercel.app/images/money_hot_black.png"
                       width="150"
                       style={{ display: "block" }}
                       alt="Money Hot"

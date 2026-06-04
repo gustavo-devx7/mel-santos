@@ -41,7 +41,7 @@ const AgeGate: React.FC = () => {
         }}
       >
         <img
-          src="/images/money hot black.png"
+          src="/images/money_hot_black.png"
           alt="privacy"
           style={{ width: 450, marginBottom: -60, }}
         />
