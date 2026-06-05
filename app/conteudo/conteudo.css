@@ -150,14 +150,13 @@ video {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.8rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .logo-wrapper {
-    width: 175px;
+    width: 135px;
     height: 70px;
     display: flex;
     align-items: center;
@@ -174,6 +173,7 @@ video {
 .main-content {
     width: 100%;
     margin-top: 120px;
+    padding: 0;
 }
 
 .container {

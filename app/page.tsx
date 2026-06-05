@@ -43,7 +43,7 @@ const AgeGate: React.FC = () => {
         <img
           src="/images/money_hot_black.png"
           alt="privacy"
-          style={{ width: 450, marginBottom: -60, }}
+          style={{ width: 150, marginBottom: 30, }}
         />
 
         <h1 style={{ marginBottom: 10, color: "black",fontWeight:700 }}>Confirmação de idade</h1>
