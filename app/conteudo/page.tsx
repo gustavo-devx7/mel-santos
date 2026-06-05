@@ -13,10 +13,8 @@ type Post = {
 }
 
 const posts: Post[] = [
-    { video: "/media/c14.mp4", style: { scale: "1", objectPosition: "50% 40%" } },
-    { video: "/media/c15.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
     { video: "/media/c16.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c21.mp4", style: { scale: "1", objectPosition: "50% 50%" } },
+    { video: "/media/c21.mp4", style: { scale: "1", objectPosition: "50% 50%" } }
 ];
 
 
