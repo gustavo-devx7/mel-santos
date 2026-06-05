@@ -13,8 +13,8 @@ type Post = {
 }
 
 const posts: Post[] = [
-    { video: "/media/c16.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
-    { video: "/media/c21.mp4", style: { scale: "1", objectPosition: "50% 50%" } }
+    { video: "/media/a1.mp4", style: { scale: "1", objectPosition: "50% 80%" } },
+    { video: "/media/a2.mp4", style: { scale: "1", objectPosition: "50% 50%" } }
 ];
 
 
@@ -193,7 +193,7 @@ export default function PrivacyPage() {
         { q: "Quando tenho acesso depois do pagamento?", a: "Imediato. Pagamento aprovado = liberação em até 10s e e-mail contendo o login de acesso." },
         { q: "Posso cancelar quando quiser? A assinatura renova?", a: "Sim. Você pode cancelar a renovação automática pela área do assinante a qualquer momento." },
         { q: "Tem reembolso?", a: "Sim. Reembolso de 7 dias sem burocracia. Se não curtir, devolvemos 100%." },
-        { q: "Como funciona a \"Chat telegram\"?", a: "Basta mandar uma mensagem no chat do produtor e combinar." },
+        { q: "Como funciona o \"contato no whatsapp\"?", a: "Basta clicar no ícone do whatsapp e começar a conversar." },
         { q: "Posso pedir conteúdo personalizado?", a: "Sim! Solicitações podem ser feitas no chat do produtor, com o conteúdo desejado." },
     ]
 
