@@ -1,10 +1,10 @@
 "use client"
 
 import { FormEvent, useState } from "react"
-import { useRouter } from "next/navigation"
+import { redirectWithParams } from "../lib/redirect"
 
 export function LoginForm() {
-  const router = useRouter()
+
   const [email, setEmail] = useState("")
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -35,15 +35,14 @@ export function LoginForm() {
 
       if (!response.ok) {
         if (response.status === 403 && data.code === "ACCESS_EXPIRED") {
-          router.push(`/conteudo?renew=1&email=${encodeURIComponent(normalizedEmail)}`)
+          redirectWithParams(`/conteudo?renew=1&email=${encodeURIComponent(normalizedEmail)}`)
           return
         }
 
         throw new Error(data.error || "Não foi possível entrar.")
       }
 
-      router.push("/plataforma")
-      router.refresh()
+      redirectWithParams("/plataforma")
     } catch (err) {
       setError(err instanceof Error ? err.message : "Não foi possível entrar.")
     } finally {

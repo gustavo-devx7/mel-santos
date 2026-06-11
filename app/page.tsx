@@ -1,13 +1,11 @@
 "use client"
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { redirectWithParams } from "../lib/redirect";
 
 const AgeGate: React.FC = () => {
-  const router = useRouter();
-
   function handleConfirm() {
-    router.push("/conteudo");
+    redirectWithParams("/conteudo")
   }
 
   return (
@@ -46,7 +44,7 @@ const AgeGate: React.FC = () => {
           style={{ width: 150, marginBottom: 30, }}
         />
 
-        <h1 style={{ marginBottom: 10, color: "black",fontWeight:700 }}>Confirmação de idade</h1>
+        <h1 style={{ marginBottom: 10, color: "black", fontWeight: 700 }}>Confirmação de idade</h1>
 
         <p style={{ marginBottom: 20, color: "black" }}>
           Este conteúdo é destinado exclusivamente para maiores de 18 anos.

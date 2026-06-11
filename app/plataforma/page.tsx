@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirectWithParams } from "../../lib/redirect";
 
 // =============================================
 // TIPOS
@@ -29,7 +29,7 @@ const modelos: Modelo[] = [
         totalVideos: 9,
         foto: 'images/mel-santos/perfil.webp', // substitua por: "/fotos/modelo1.jpg"
     },
-    
+
 ];
 
 // =============================================
@@ -70,7 +70,6 @@ const IconArrow = () => (
 // CARD MODELO
 // =============================================
 function CardModelo({ modelo }: { modelo: Modelo }) {
-    const router = useRouter();
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -257,7 +256,7 @@ function CardModelo({ modelo }: { modelo: Modelo }) {
                         transition: "all 0.2s",
                         letterSpacing: "0.03em",
                     }}
-                    onClick={() => router.push("/plataforma" + modelo.pasta)}
+                    onClick={() => redirectWithParams("/plataforma" + modelo.pasta)}
                 >
                     VER CONTEÚDO <IconArrow />
                 </button>
