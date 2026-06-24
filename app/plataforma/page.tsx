@@ -27,7 +27,7 @@ const modelos: Modelo[] = [
         pasta: "/mel-santos",
         totalFotos: 9,
         totalVideos: 9,
-        foto: 'images/mel-santos/perfil.webp', // substitua por: "/fotos/modelo1.jpg"
+        foto: 'images/mel-santos/f1.webp', 
     },
 
 ];
