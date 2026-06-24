@@ -559,7 +559,7 @@ export default function Plataforma() {
             fontSize: "18px",
             boxShadow: "0 0 16px rgba(5,150,105,0.4)",
           }}>
-             <img src="/images/mh white.png" alt="Logo" style={{ width: "100%", height: "60%" }} className="object-cover"/> 
+             <img src="/images/mh_white.png" alt="Logo" style={{ width: "100%", height: "60%" }} className="object-cover"/> 
             
           </div>
          

@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { execute } from "@/lib/db"
-import { sendBrevoEmail } from "@/lib/brevo"
-import { renderPaymentConfirmationEmail } from "@/lib/payment-confirmation-email"
 
-// Webhook para receber notificações da BuckPay
-// Configure esta URL no painel da BuckPay ou via postbackUrl ao criar a transação
+// Webhook para receber notificaÃ§Ãµes da BuckPay
+// Configure esta URL no painel da BuckPay ou via postbackUrl ao criar a transaÃ§Ã£o
 
 interface BuckPayWebhookPayload {
   event: "transaction.created" | "transaction.processed"
@@ -53,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     // Evento: transaction.processed = PIX pago
     if (event === "transaction.processed" && status === "paid") {
-      console.log(`PIX pago - Transação: ${transactionId}`)
+      console.log(`PIX pago - TransaÃ§Ã£o: ${transactionId}`)
       console.log(`Comprador: ${data.buyer?.name} (${data.buyer?.email})`)
       console.log(`Valor: R$ ${(data.total_amount / 100).toFixed(2)}`)
 
@@ -69,29 +67,14 @@ export async function POST(request: NextRequest) {
         } catch (error) {
           console.error("Erro ao salvar cliente no banco de dados:", error)
         }
-
-        const emailResult = await sendBrevoEmail({
-          toEmail: data.buyer.email,
-          toName: data.buyer.name ?? "Cliente",
-          subject: "Pagamento recebido com sucesso",
-          htmlContent: renderPaymentConfirmationEmail({
-            buyerName: data.buyer.name,
-            transactionId,
-            totalAmount: data.total_amount,
-          }),
-        })
-
-        if (!emailResult.ok) {
-          console.error("Erro ao enviar email Brevo:", emailResult.error, emailResult.response)
-        }
       } else {
-        console.warn(`Transação paga sem email do comprador: ${transactionId}`)
+        console.warn(`TransaÃ§Ã£o paga sem email do comprador: ${transactionId}`)
       }
     }
 
-    // Evento: transaction.created = Transação pendente
+    // Evento: transaction.created = TransaÃ§Ã£o pendente
     if (event === "transaction.created" && status === "pending") {
-      console.log(`Transação criada (pendente): ${transactionId}`)
+      console.log(`TransaÃ§Ã£o criada (pendente): ${transactionId}`)
     }
 
     // Retorna 200 para confirmar recebimento do webhook

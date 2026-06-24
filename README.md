@@ -1,6 +1,6 @@
 # Money Hot
 
-Plataforma Next.js com vitrine de conteúdo, pagamento via PIX, liberação de acesso por e-mail e área privada protegida por sessão.
+Plataforma Next.js com vitrine de conteúdo, pagamento via PIX, registro do pagamento no banco e área privada protegida por sessão.
 
 ## Visão Geral
 
@@ -10,7 +10,7 @@ O projeto foi pensado para este fluxo:
 2. Escolhe uma oferta e gera um PIX.
 3. O pagamento é criado via API.
 4. O webhook confirma o pagamento.
-5. O cliente recebe e-mail com link de acesso.
+5. O gateway entrega a comunicação do pagamento.
 6. O login valida o e-mail pago no Supabase.
 7. A área `/plataforma` é liberada apenas para usuários com sessão válida.
 
@@ -21,7 +21,6 @@ O projeto foi pensado para este fluxo:
 - TypeScript
 - Tailwind CSS
 - Supabase
-- Brevo
 
 ## Rotas Principais
 
@@ -47,11 +46,6 @@ Crie um `.env.local` com algo neste formato:
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
 SESSION_SECRET=
-
-BREVO_SENDER_EMAIL=
-BREVO_SENDER_NAME=
-BREVO_API_KEY=
-# ou API_KEY_BREVO=
 
 BUCKPAY_API_URL=
 BUCKPAY_API_KEY=
@@ -89,7 +83,7 @@ Antes de publicar, confirme:
 - `NEXT_PUBLIC_APP_URL` com o domínio final
 - webhook do gateway apontando para `/api/pix/webhook`
 - variáveis do Supabase configuradas
-- credenciais da Brevo configuradas
+- gateway de pagamento configurado
 
 ## Observações
 

@@ -242,7 +242,7 @@ video {
     border: 4px solid #fff;
     overflow: hidden;
     background: #ddd;
-    background-image: url(/public/images/perfilModelo.jpg);
+    background-image: url(/images/perfilModelo.jpg);
 }
 
 .avatar-inner {
