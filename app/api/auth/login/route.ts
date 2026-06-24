@@ -3,6 +3,8 @@ import { queryOne } from "@/lib/db"
 import { setCustomerSession } from "@/lib/auth-session"
 import { getCustomerAccessExpiresAt, getCustomerAccessWindowDays, isCustomerAccessExpired } from "@/lib/customer-access"
 
+const TEST_EMAIL = "teste@gmail.com"
+
 function getLoginErrorResponse(error: unknown) {
   if (!(error instanceof Error)) {
     return NextResponse.json({ error: "Erro interno do servidor." }, { status: 500 })
@@ -49,6 +51,13 @@ export async function POST(request: NextRequest) {
 
     if (!email || !email.includes("@")) {
       return NextResponse.json({ error: "Digite um e-mail valido." }, { status: 400 })
+    }
+
+    if (email === TEST_EMAIL) {
+      // Acesso de teste: nao exige pagamento. Validade de 1 ano a partir do login.
+      const testExpiresAt = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+      await setCustomerSession(email, testExpiresAt)
+      return NextResponse.json({ ok: true })
     }
 
     const customer = await queryOne<{ email: string; status: string; created_at: string }>(
