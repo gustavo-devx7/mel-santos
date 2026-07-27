@@ -20,7 +20,7 @@ export default async function AdminLoginPage({
       className="min-h-screen px-6 py-10"
       style={{
         background:
-          "radial-gradient(circle at top, rgba(27,94,32,0.20) 0%, transparent 36%), linear-gradient(180deg, #08110b 0%, #0f1c13 48%, var(--background) 48.1%, var(--background) 100%)",
+          "radial-gradient(circle at top, rgba(69, 25, 96, 0.20) 0%, transparent 36%), linear-gradient(180deg, #0e0811 0%, #180f1c 48%, var(--background) 48.1%, var(--background) 100%)",
       }}
     >
       <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-5xl items-center justify-center">
@@ -35,23 +35,23 @@ export default async function AdminLoginPage({
           {/* ── left panel ── */}
           <div
             className="hidden flex-col justify-between p-10 text-white lg:flex"
-            style={{ background: "#0d1a11" }}
+            style={{ background: "#160d1a" }}
           >
             <div className="space-y-6">
-              <span className="inline-flex w-fit rounded-full border border-emerald-400/25 bg-emerald-500/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-emerald-200">
+              <span className="inline-flex w-fit rounded-full border border-purple-400/25 bg-purple-500/10 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-purple-200">
                 Money Hot Admin
               </span>
               <div className="space-y-2.5">
                 <h1 className="max-w-sm text-3xl font-normal leading-tight tracking-tight">
                   Visão completa de clientes, receita e recorrência.
                 </h1>
-                <p className="max-w-md text-sm leading-6 text-emerald-50/60">
+                <p className="max-w-md text-sm leading-6 text-purple-50/60">
                   Entradas consolidadas por e-mail, com primeiro e último pagamento, faturamento total e status de acesso.
                 </p>
               </div>
             </div>
 
-            <div className="space-y-3 text-sm text-emerald-50/65">
+            <div className="space-y-3 text-sm text-purple-50/65">
               <div className="rounded-2xl border border-white/8 bg-white/5 p-4">
                 Receita separada entre novo cliente e recorrência.
               </div>
@@ -115,7 +115,7 @@ export default async function AdminLoginPage({
 
                 <button
                   type="submit"
-                  className="h-12 w-full rounded-2xl bg-emerald-600 px-4 text-sm font-semibold text-white transition hover:bg-emerald-700 active:scale-[0.98]"
+                  className="h-12 w-full rounded-2xl bg-purple-600 px-4 text-sm font-semibold text-white transition hover:bg-purple-700 active:scale-[0.98]"
                 >
                   Entrar no painel
                 </button>

@@ -80,9 +80,9 @@ function CardModelo({ modelo }: { modelo: Modelo }) {
                 borderRadius: "16px",
                 overflow: "hidden",
                 background: "#161b26",
-                border: `1px solid ${hovered ? "#059669" : "#1f2937"}`,
+                border: `1px solid ${hovered ? "#77019a" : "#1f2937"}`,
                 boxShadow: hovered
-                    ? "0 8px 24px rgba(5,150,105,0.25)"
+                    ? "0 8px 24px rgba(119, 1, 154, 0.25)"
                     : "0 2px 10px rgba(0,0,0,0.35)",
                 transition: "all 0.25s cubic-bezier(.4,0,.2,1)",
                 transform: hovered ? "translateY(-4px)" : "translateY(0)",
@@ -192,7 +192,7 @@ function CardModelo({ modelo }: { modelo: Modelo }) {
                     style={{
                         margin: "0 0 8px",
                         fontSize: "11px",
-                        color: "#059669",
+                        color: "#77019a",
                         fontWeight: 600,
                     }}
                 >
@@ -240,7 +240,7 @@ function CardModelo({ modelo }: { modelo: Modelo }) {
                     style={{
                         width: "100%",
                         background: hovered
-                            ? "linear-gradient(135deg, #059669, #065f46)"
+                            ? "linear-gradient(135deg, #77019a, #4d0461)"
                             : "#1f2937",
                         color: hovered ? "#fff" : "#9ca3af",
                         border: "none",
@@ -288,7 +288,7 @@ export default function Vitrine() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::placeholder { color: #4b5563; }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #059669; border-radius: 99px; }
+        ::-webkit-scrollbar-thumb { background: #77019a; border-radius: 99px; }
         input:focus { outline: none; }
       `}</style>
 
@@ -304,11 +304,11 @@ export default function Vitrine() {
                 {/* Logo — substitua aqui */}
                 <div style={{
                     minWidth: "42px", height: "42px",
-                    background: "linear-gradient(135deg, #059669, #065f46)",
+                    background: "linear-gradient(135deg, #77019a, #4d0461)",
                     borderRadius: "12px",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: "20px",
-                    boxShadow: "0 0 18px rgba(5,150,105,0.5)",
+                    boxShadow: "0 0 18px rgba(119, 1, 154, 0.5)",
                     flexShrink: 0,
                 }}>
                     {/* <img src="/logo.svg" alt="logo" style={{width:"100%",height:"100%"}} /> */}
@@ -339,7 +339,7 @@ export default function Vitrine() {
                             color: "#f9fafb",
                             transition: "border-color 0.2s",
                         }}
-                        onFocus={e => (e.currentTarget.style.borderColor = "#059669")}
+                        onFocus={e => (e.currentTarget.style.borderColor = "#77019a")}
                         onBlur={e => (e.currentTarget.style.borderColor = "#1f2937")}
                     />
                 </div>
@@ -356,8 +356,8 @@ export default function Vitrine() {
                     flexShrink: 0,
                 }}
                     onMouseEnter={e => {
-                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#059669";
-                        (e.currentTarget as HTMLButtonElement).style.color = "#059669";
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#77019a";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#77019a";
                     }}
                     onMouseLeave={e => {
                         (e.currentTarget as HTMLButtonElement).style.borderColor = "#1f2937";
@@ -375,7 +375,7 @@ export default function Vitrine() {
                 overflow: "hidden",
                 position: "relative",
                 height: "70px",
-                background: "linear-gradient(135deg, #065f46 0%, #059669 40%, #034d38 100%)",
+                background: "linear-gradient(135deg, #4d0461 0%, #77019a 40%, #3e014f 100%)",
                 display: "flex", alignItems: "center",
                 cursor: "pointer"
             }}>
@@ -437,7 +437,7 @@ export default function Vitrine() {
                     {busca && (
                         <button onClick={() => setBusca("")} style={{
                             background: "none", border: "none", cursor: "pointer",
-                            color: "#059669", fontSize: "13px", fontWeight: 700,
+                            color: "#77019a", fontSize: "13px", fontWeight: 700,
                         }}>
                             Limpar busca ×
                         </button>

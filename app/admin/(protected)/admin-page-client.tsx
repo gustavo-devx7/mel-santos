@@ -25,13 +25,13 @@ function ThemeToggle() {
     >
       <span
         className="relative inline-block h-[18px] w-8 flex-shrink-0 rounded-full transition-colors duration-300"
-        style={{ background: isDark ? "#1e3027" : "rgba(255,255,255,0.2)" }}
+        style={{ background: isDark ? "#2b1e30" : "rgba(255,255,255,0.2)" }}
       >
         <span
           className="absolute top-[2px] h-3.5 w-3.5 rounded-full transition-all duration-300"
           style={{
             left: isDark ? "calc(100% - 18px)" : "2px",
-            background: isDark ? "#22c55e" : "#fff",
+            background: isDark ? "#951ec9" : "#fff",
           }}
         />
       </span>
@@ -62,7 +62,7 @@ export function AdminPageClient({
           <div
             className="relative overflow-hidden rounded-2xl"
             style={{
-              background: "linear-gradient(135deg, #0f1b14 0%, #101814 100%)",
+              background: "linear-gradient(135deg, #180f1b 0%, #161018 100%)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.35)",
             }}
           >
@@ -71,13 +71,13 @@ export function AdminPageClient({
               aria-hidden
               className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full"
               style={{
-                background: "radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(149, 30, 201, 0.12) 0%, transparent 70%)",
               }}
             />
 
             {/* ── topbar: badge + controles ── */}
             <div className="relative flex items-center justify-between border-b border-white/[0.07] px-6 py-3 sm:px-8">
-              <span className="inline-flex items-center rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-emerald-300">
+              <span className="inline-flex items-center rounded-full border border-purple-500/25 bg-purple-500/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-purple-300">
                 Money Hot Admin
               </span>
 

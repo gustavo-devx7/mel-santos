@@ -4,76 +4,86 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f6f7f4;
-  --foreground: #141713;
+  --background: #f5f4f7;
+  --foreground: #151317;
   --card: #ffffff;
-  --card-foreground: #141713;
+  --card-foreground: #151317;
   --popover: #ffffff;
-  --popover-foreground: #141713;
+  --popover-foreground: #151317;
   --primary: #121212;
   --primary-foreground: #f5f5f5;
-  --secondary: #edf1eb;
-  --secondary-foreground: #141713;
-  --muted: #edf1eb;
-  --muted-foreground: #5f665d;
-  --accent: #e6f6eb;
-  --accent-foreground: #123522;
+  --secondary: #eeebf1;
+  --secondary-foreground: #151317;
+  --muted: #eeebf1;
+  --muted-foreground: #625d66;
+  --accent: #f1e6f6;
+  --accent-foreground: #2b1136;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #dde3dc;
-  --input: #dde3dc;
-  --ring: #36a269;
-  --chart-1: #13ca13;
+  --border: #e0dce3;
+  --input: #e0dce3;
+  --ring: #8533a5;
+  --chart-1: #830ecf;
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.625rem;
-  --sidebar: #fbfcfa;
-  --sidebar-foreground: #141713;
+  --sidebar: #fbfafc;
+  --sidebar-foreground: #151317;
   --sidebar-primary: #121212;
   --sidebar-primary-foreground: #f5f5f5;
-  --sidebar-accent: #edf1eb;
-  --sidebar-accent-foreground: #141713;
-  --sidebar-border: #dde3dc;
-  --sidebar-ring: #36a269;
-  --verde-escuro: #065f46;
-  --verde-claro: #059669;
+  --sidebar-accent: #eeebf1;
+  --sidebar-accent-foreground: #151317;
+  --sidebar-border: #e0dce3;
+  --sidebar-ring: #8533a5;
+  --roxo-escuro: #4d0461;
+  --roxo-claro: #77019a;
+  --roxo-50: #f9ecfd;
+  --roxo-100: #efd0fb;
+  --roxo-200: #e0a5f5;
+  --roxo-300: #ca6bea;
+  --roxo-400: #af30d7;
+  --roxo-500: #940cbd;
+  --roxo-600: #77019a;
+  --roxo-700: #60017b;
+  --roxo-800: #4d0461;
+  --roxo-900: #3f0450;
 }
 
 .dark {
-  --background: #0f1310;
-  --foreground: #eef2ec;
-  --card: #151a16;
-  --card-foreground: #eef2ec;
-  --popover: #151a16;
-  --popover-foreground: #eef2ec;
-  --primary: #eef2ec;
-  --primary-foreground: #0f1310;
-  --secondary: #1d241f;
-  --secondary-foreground: #eef2ec;
-  --muted: #1d241f;
-  --muted-foreground: #a7b0a8;
-  --accent: #133322;
-  --accent-foreground: #dff6e8;
+  --background: #120f13;
+  --foreground: #efecf2;
+  --card: #18151a;
+  --card-foreground: #efecf2;
+  --popover: #18151a;
+  --popover-foreground: #efecf2;
+  --primary: #efecf2;
+  --primary-foreground: #120f13;
+  --secondary: #221d24;
+  --secondary-foreground: #efecf2;
+  --muted: #221d24;
+  --muted-foreground: #ada7b0;
+  --accent: #2a1234;
+  --accent-foreground: #efdef7;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: #283129;
-  --input: #283129;
-  --ring: #36a269;
+  --border: #2e2831;
+  --input: #2e2831;
+  --ring: #8533a5;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: #151a16;
-  --sidebar-foreground: #eef2ec;
+  --sidebar: #18151a;
+  --sidebar-foreground: #efecf2;
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: #1d241f;
-  --sidebar-accent-foreground: #eef2ec;
-  --sidebar-border: #283129;
-  --sidebar-ring: #36a269;
+  --sidebar-accent: #221d24;
+  --sidebar-accent-foreground: #efecf2;
+  --sidebar-border: #2e2831;
+  --sidebar-ring: #8533a5;
 }
 
 @theme inline {
@@ -131,7 +141,7 @@
 
 
 .promo-banner {
-  background: linear-gradient(to right, var(--verde-400), var(--verde-500));
+  background: linear-gradient(to right, var(--roxo-400), var(--roxo-500));
   color: #ffffff;
   text-align: center;
   padding: 10px 20px;
@@ -172,7 +182,7 @@ body {
 }
 
 .buttonTempo {
-  background: linear-gradient(45deg, var(--verde-claro), var(--verde-escuro));
+  background: linear-gradient(45deg, var(--roxo-claro), var(--roxo-escuro));
   color: white;
   padding: 14px 28px;
   border-radius: 12px;
@@ -255,7 +265,7 @@ body {
 }
 
 .buttonUnlock {
-  background-color: var(--verde-claro);
+  background-color: var(--roxo-claro);
   border-radius: 10px;
   color: white;
   padding: 4px;
@@ -264,7 +274,7 @@ body {
 }
 
 .teste {
-  color: var(--verde-claro);
+  color: var(--roxo-claro);
 }
 
 body {

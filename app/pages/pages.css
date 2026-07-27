@@ -2,19 +2,19 @@
 
 
 :root {
-  --verde-50: #ecfdf5;
-  --verde-100: #d1fae5;
-  --verde-200: #a7f3d0;
-  --verde-300: #6ee7b7;
-  --verde-400: #34d399;
-  --verde-500: #10b981;
-  --verde-600: #059669;
-  --verde-700: #047857;
-  --verde-800: #065f46;
-  --verde-900: #064e3b;
+  --roxo-50: #f9ecfd;
+  --roxo-100: #efd0fb;
+  --roxo-200: #e0a5f5;
+  --roxo-300: #ca6bea;
+  --roxo-400: #af30d7;
+  --roxo-500: #940cbd;
+  --roxo-600: #77019a;
+  --roxo-700: #60017b;
+  --roxo-800: #4d0461;
+  --roxo-900: #3f0450;
 
-  --verde-escuro: #065f46;
-  --verde-claro: #059669;
+  --roxo-escuro: #4d0461;
+  --roxo-claro: #77019a;
 
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
@@ -38,33 +38,33 @@
   --radius: 0.5rem;
   --radius-sm: 0.25rem;
   --radius-lg: 0.75rem;
-  --surface-app: #f6f7f4;
+  --surface-app: #f5f4f7;
   --surface-panel: #ffffff;
-  --surface-elevated: #fbfcfa;
-  --text-main: #20241f;
-  --text-soft: #5f665d;
-  --text-faint: #8e958d;
-  --line-soft: #e3e8e2;
+  --surface-elevated: #fbfafc;
+  --text-main: #221f24;
+  --text-soft: #625d66;
+  --text-faint: #928d95;
+  --line-soft: #e5e2e8;
 }
 
 .dark {
-  --surface-app: #0f1310;
-  --surface-panel: #151a16;
-  --surface-elevated: #1a211b;
-  --text-main: #eef2ec;
-  --text-soft: #a7b0a8;
-  --text-faint: #7f8880;
-  --line-soft: #283129;
-  --gray-50: #161b17;
-  --gray-100: #1d241f;
-  --gray-200: #283129;
-  --gray-300: #334036;
-  --gray-400: #81907f;
-  --gray-500: #9ba89a;
-  --gray-600: #bcc6bc;
-  --gray-700: #d3dbd2;
-  --gray-800: #e3e9e3;
-  --gray-900: #f5f8f4;
+  --surface-app: #120f13;
+  --surface-panel: #18151a;
+  --surface-elevated: #1f1a21;
+  --text-main: #efecf2;
+  --text-soft: #ada7b0;
+  --text-faint: #857f88;
+  --line-soft: #2e2831;
+  --gray-50: #19161b;
+  --gray-100: #221d24;
+  --gray-200: #2e2831;
+  --gray-300: #3c3340;
+  --gray-400: #897f90;
+  --gray-500: #a29aa8;
+  --gray-600: #c2bcc6;
+  --gray-700: #d7d2db;
+  --gray-800: #e7e3e9;
+  --gray-900: #f6f4f8;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.35),
     0 1px 2px 0 rgba(0, 0, 0, 0.22);
@@ -281,28 +281,28 @@ main {
 
 .primary-button {
   background: linear-gradient(to right,
-      var(--verde-400),
-      var(--verde-500));
+      var(--roxo-400),
+      var(--roxo-500));
   color: white;
   border: none;
 }
 
 .primary-button:hover {
   background: linear-gradient(to right,
-      var(--verde-500),
-      var(--verde-600));
+      var(--roxo-500),
+      var(--roxo-600));
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 .outline-button {
   background-color: var(--surface-panel);
-  border: 1px solid var(--verde-200);
+  border: 1px solid var(--roxo-200);
   color: var(--text-main);
 }
 
 .outline-button:hover {
-  background-color: color-mix(in srgb, var(--verde-50) 58%, var(--surface-panel));
+  background-color: color-mix(in srgb, var(--roxo-50) 58%, var(--surface-panel));
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -319,8 +319,8 @@ main {
   font-size: 0.75rem;
   font-weight: 500;
   border-radius: 9999px;
-  background-color: var(--verde-100);
-  color: var(--verde-800);
+  background-color: var(--roxo-100);
+  color: var(--roxo-800);
 }
 
 .price {
@@ -328,21 +328,21 @@ main {
 }
 
 .highlight {
-  color: var(--verde-600);
+  color: var(--roxo-600);
 }
 
 /* Pulse Animation */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(19, 202, 19, 0.7);
+    box-shadow: 0 0 0 0 rgba(131, 14, 207, 0.7);
   }
 
   70% {
-    box-shadow: 0 0 0 10px rgba(19, 202, 19, 0);
+    box-shadow: 0 0 0 10px rgba(131, 14, 207, 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(19, 202, 19, 0);
+    box-shadow: 0 0 0 0 rgba(131, 14, 207, 0);
   }
 }
 
@@ -398,17 +398,17 @@ main {
 }
 
 .tab.active {
-  background-color: var(--verde-50);
-  color: var(--verde-500);
+  background-color: var(--roxo-50);
+  color: var(--roxo-500);
   font-weight: 500;
 }
 
 .tab:first-child.active {
-  box-shadow: inset -1px 0 0 var(--verde-200);
+  box-shadow: inset -1px 0 0 var(--roxo-200);
 }
 
 .tab:last-child.active {
-  box-shadow: inset 1px 0 0 var(--verde-200);
+  box-shadow: inset 1px 0 0 var(--roxo-200);
 }
 
 .tab-content {
@@ -445,8 +445,8 @@ main {
 }
 
 .subtab.active {
-  background-color: var(--verde-100);
-  color: var(--verde-700);
+  background-color: var(--roxo-100);
+  color: var(--roxo-700);
   font-weight: 500;
 }
 
@@ -554,7 +554,7 @@ main {
 .locked-content {
   position: relative;
   height: 15rem;
-  background-color: color-mix(in srgb, var(--verde-50) 60%, var(--surface-panel));
+  background-color: color-mix(in srgb, var(--roxo-50) 60%, var(--surface-panel));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -576,7 +576,7 @@ main {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 30%, var(--verde-50) 70%);
+    background: radial-gradient(circle, transparent 30%, var(--roxo-50) 70%);
     opacity: 0.8;
   } */
 
@@ -652,7 +652,7 @@ main {
 .media-item {
   position: relative;
   aspect-ratio: 1 / 1;
-  background-color: var(--verde-50);
+  background-color: var(--roxo-50);
   border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
@@ -665,7 +665,7 @@ main {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, transparent 30%, var(--verde-50) 70%);
+    background: radial-gradient(circle, transparent 30%, var(--roxo-50) 70%);
     opacity: 0.8;
   } */
 

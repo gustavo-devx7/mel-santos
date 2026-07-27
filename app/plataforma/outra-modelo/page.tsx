@@ -112,8 +112,8 @@ function MediaCard({ item, dark }: { item: MediaItem; dark: boolean }) {
       onMouseEnter={e => {
         (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
         (e.currentTarget as HTMLDivElement).style.boxShadow = dark
-          ? "0 12px 36px rgba(5,150,105,0.25)"
-          : "0 12px 36px rgba(6,95,70,0.15)";
+          ? "0 12px 36px rgba(119, 1, 154, 0.25)"
+          : "0 12px 36px rgba(77, 4, 97, 0.15)";
       }}
       onMouseLeave={e => {
         (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
@@ -127,6 +127,8 @@ function MediaCard({ item, dark }: { item: MediaItem; dark: boolean }) {
         <img
           src={item.thumbnail}
           alt={item.title}
+          loading="lazy"
+          decoding="async"
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.4s ease" }}
           onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
           onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")}
@@ -135,7 +137,7 @@ function MediaCard({ item, dark }: { item: MediaItem; dark: boolean }) {
         {/* Badge tipo */}
         <div style={{
           position: "absolute", top: "10px", left: "10px",
-          background: item.type === "video" ? "rgba(5,150,105,0.92)" : "rgba(6,95,70,0.88)",
+          background: item.type === "video" ? "rgba(119, 1, 154, 0.92)" : "rgba(77, 4, 97, 0.88)",
           color: "#fff",
           fontSize: "10px",
           fontWeight: 800,
@@ -176,7 +178,7 @@ function MediaCard({ item, dark }: { item: MediaItem; dark: boolean }) {
             onMouseLeave={e => ((e.currentTarget as HTMLDivElement).style.opacity = "0")}
           >
             <div style={{
-              background: "rgba(5,150,105,0.88)",
+              background: "rgba(119, 1, 154, 0.88)",
               borderRadius: "50%",
               width: "60px", height: "60px",
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -203,7 +205,7 @@ function MediaCard({ item, dark }: { item: MediaItem; dark: boolean }) {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={{
             fontSize: "12px",
-            color: "#059669",
+            color: "#77019a",
             fontWeight: 600,
           }}>
             @{item.creator}
@@ -213,7 +215,7 @@ function MediaCard({ item, dark }: { item: MediaItem; dark: boolean }) {
             style={{
               display: "flex", alignItems: "center", gap: "5px",
               background: "none", border: "none", cursor: "pointer",
-              color: liked ? "#059669" : (dark ? "#6b7280" : "#9ca3af"),
+              color: liked ? "#77019a" : (dark ? "#6b7280" : "#9ca3af"),
               fontSize: "12px", fontWeight: 600,
               transition: "color 0.15s, transform 0.15s",
               padding: 0,
@@ -267,14 +269,14 @@ export default function Plataforma() {
       * { box-sizing: border-box; margin: 0; padding: 0; }
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: #059669; border-radius: 99px; }
+      ::-webkit-scrollbar-thumb { background: #77019a; border-radius: 99px; }
       .play-overlay:hover { opacity: 1 !important; }
     `}</style>
 
       {/* ── NAVBAR ── */}
       <header style={{
         position: "sticky", top: 0, zIndex: 100,
-        background: dark ? "#0f1310" : "#f3f4f6",
+        background: dark ? "#120f13" : "#f3f4f6",
         borderBottom: `1px solid ${borderColor}`,
         padding: "0 32px",
         height: "68px",
@@ -289,11 +291,11 @@ export default function Plataforma() {
           {/* ↓↓↓ INSIRA SUA LOGO AQUI ↓↓↓ */}
           <div style={{
             width: "38px", height: "38px",
-            background: "linear-gradient(135deg, #059669, #065f46)",
+            background: "linear-gradient(135deg, #77019a, #4d0461)",
             borderRadius: "10px",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: "18px",
-            boxShadow: "0 0 16px rgba(5,150,105,0.4)",
+            boxShadow: "0 0 16px rgba(119, 1, 154, 0.4)",
           }}>
             {/* <img src="/logo.svg" alt="Logo" style={{ width: "100%", height: "100%" }} /> */}
             ✦
@@ -302,7 +304,7 @@ export default function Plataforma() {
             fontWeight: 800,
             fontSize: "18px",
             letterSpacing: "-0.03em",
-            background: "linear-gradient(135deg, #059669, #34d399)",
+            background: "linear-gradient(135deg, #77019a, #af30d7)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}>
@@ -335,7 +337,7 @@ export default function Plataforma() {
               outline: "none",
               transition: "border-color 0.2s",
             }}
-            onFocus={e => (e.currentTarget.style.borderColor = "#059669")}
+            onFocus={e => (e.currentTarget.style.borderColor = "#77019a")}
             onBlur={e => (e.currentTarget.style.borderColor = borderColor)}
           />
         </div>
@@ -349,7 +351,7 @@ export default function Plataforma() {
           }}>
             {(["grade", "lista"] as const).map(v => (
               <button key={v} onClick={() => setGrid(v)} style={{
-                background: grid === v ? "#059669" : "transparent",
+                background: grid === v ? "#77019a" : "transparent",
                 border: "none", cursor: "pointer",
                 color: grid === v ? "#fff" : textMuted,
                 borderRadius: "8px",
@@ -385,7 +387,7 @@ export default function Plataforma() {
 
       {/* ── HERO BANNER ── */}
       <div style={{
-        background: "linear-gradient(135deg, #065f46 0%, #059669 50%, #034d38 100%)",
+        background: "linear-gradient(135deg, #4d0461 0%, #77019a 50%, #3e014f 100%)",
         padding: "40px 32px",
         textAlign: "center",
         position: "relative",
@@ -433,7 +435,7 @@ export default function Plataforma() {
               onClick={() => setFilter(f)}
               style={{
                 background: filter === f
-                  ? "linear-gradient(135deg, #059669, #065f46)"
+                  ? "linear-gradient(135deg, #77019a, #4d0461)"
                   : (dark ? "#1f2937" : "#e5e7eb"),
                 color: filter === f ? "#fff" : textMuted,
                 border: "none", borderRadius: "20px",
@@ -442,7 +444,7 @@ export default function Plataforma() {
                 cursor: "pointer",
                 letterSpacing: "0.04em",
                 transition: "all 0.18s",
-                boxShadow: filter === f ? "0 4px 14px rgba(5,150,105,0.4)" : "none",
+                boxShadow: filter === f ? "0 4px 14px rgba(119, 1, 154, 0.4)" : "none",
               }}
             >
               {f === "todos" ? "Todos" : f === "foto" ? "📷 Fotos" : "▶ Vídeos"}
@@ -491,7 +493,7 @@ export default function Plataforma() {
         {/* Logo rodapé — substitua pelo seu */}
         <span style={{
           fontWeight: 800, fontSize: "15px",
-          background: "linear-gradient(135deg, #059669, #34d399)",
+          background: "linear-gradient(135deg, #77019a, #af30d7)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}>

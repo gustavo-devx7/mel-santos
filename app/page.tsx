@@ -19,7 +19,7 @@ const AgeGate: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(to top, #123522, #059669)",
+        background: "linear-gradient(to top, #2b1136, #77019a)",
         fontFamily: "Google Sans, sans-serif",
       }}
     >
@@ -55,7 +55,7 @@ const AgeGate: React.FC = () => {
           onClick={handleConfirm}
           style={{
             padding: "10px 20px",
-            background: "linear-gradient(to right, #123522, #059669)",
+            background: "linear-gradient(to right, #2b1136, #77019a)",
             color: "white",
             border: "none",
             borderRadius: 5,

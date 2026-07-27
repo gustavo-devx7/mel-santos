@@ -47,7 +47,7 @@ function accessStatusLabel(status: "ativo" | "expirado" | "pendente") {
 
 function StatusPill({ status }: { status: "ativo" | "expirado" | "pendente" }) {
   const styles: Record<string, string> = {
-    ativo:    "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-400 dark:border-emerald-900",
+    ativo:    "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/50 dark:text-purple-400 dark:border-purple-900",
     expirado: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/50 dark:text-amber-400 dark:border-amber-900",
     pendente: "bg-[var(--muted)] text-[var(--muted-foreground)] border-[var(--border)]",
   }
@@ -78,17 +78,17 @@ function MetricCard({
       <article
         className="rounded-[20px] p-5"
         style={{
-          background: "linear-gradient(135deg, #0f1b14, #101814)",
-          boxShadow: "0 16px 48px rgba(15,27,20,0.25)",
+          background: "linear-gradient(135deg, #180f1b, #161018)",
+          boxShadow: "0 16px 48px rgba(24, 15, 27, 0.25)",
         }}
       >
-        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-300">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-300">
           {label}
         </p>
         <h3 className="mt-3 text-[28px] font-normal leading-none tracking-tight text-white">
           {value}
         </h3>
-        <p className="mt-2 text-sm text-emerald-100/60">{sub}</p>
+        <p className="mt-2 text-sm text-purple-100/60">{sub}</p>
       </article>
     )
   }
@@ -151,7 +151,7 @@ function BarRow({
           className="h-2 rounded-full transition-all duration-700"
           style={{
             width: `${pct}%`,
-            background: variant === "green" ? "#22c55e" : "var(--foreground)",
+            background: variant === "green" ? "#951ec9" : "var(--foreground)",
           }}
         />
       </div>
@@ -209,14 +209,14 @@ export function AdminDashboard({ data }: { data: AdminDashboardData }) {
       >
         <TabsTrigger
           value="visao-geral"
-          className="rounded-xl px-5 py-2 text-sm font-medium transition-colors data-[state=active]:bg-[#0f1b14] data-[state=active]:text-white"
+          className="rounded-xl px-5 py-2 text-sm font-medium transition-colors data-[state=active]:bg-[#180f1b] data-[state=active]:text-white"
           style={{ color: "var(--muted-foreground)" }}
         >
           Visão geral
         </TabsTrigger>
         <TabsTrigger
           value="clientes"
-          className="rounded-xl px-5 py-2 text-sm font-medium transition-colors data-[state=active]:bg-[#0f1b14] data-[state=active]:text-white"
+          className="rounded-xl px-5 py-2 text-sm font-medium transition-colors data-[state=active]:bg-[#180f1b] data-[state=active]:text-white"
           style={{ color: "var(--muted-foreground)" }}
         >
           Clientes

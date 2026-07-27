@@ -38,7 +38,30 @@ O projeto foi pensado para este fluxo:
 - `/api/pix/status/[transactionId]` - consulta status do pagamento
 - `/api/pix/webhook` - recebe confirmação do gateway
 
-## Variáveis de Ambiente
+## Identidade Visual
+
+O tema do projeto usa **roxo escuro** como cor principal (antes era verde). A troca cobriu:
+
+- Variáveis de tema em `app/globals.css` (`--primary`, `--ring`, `--accent`, `--sidebar-*`, etc.)
+- Escala de cores customizada em `app/pages/pages.css` (`--verde-*` foi renomeada para `--roxo-*`, indo de `--roxo-50` a `--roxo-900`)
+- Todas as cores hardcoded (hex e `rgba(...)`) em `app/plataforma`, `app/conteudo`, `app/admin` e `components/login-form.tsx`
+- Classes Tailwind `emerald-*` trocadas por `purple-*`
+
+Se precisar ajustar o tom, mexa em `--roxo-escuro` / `--roxo-claro` (`app/globals.css`) e na escala `--roxo-50..900` (`app/pages/pages.css`).
+
+## Carregamento Lazy de Mídia
+
+Fotos e vídeos só são baixados quando estão prestes a entrar na tela:
+
+- `<img>` usa o atributo nativo `loading="lazy"` (com `decoding="async"`), exceto as imagens acima da dobra (banner inicial de confirmação de idade, avatar principal do perfil), que carregam de imediato para não atrasar o primeiro carregamento.
+- `<video>` **não tem suporte confiável a `loading="lazy"`** em todos os navegadores, então foi criado o componente `components/lazy-video.tsx`. Ele usa `IntersectionObserver` e só monta a tag `<video>` (e portanto só inicia o download do arquivo) quando o elemento está a ~200px de entrar na viewport. Antes disso, renderiza um placeholder leve no lugar.
+- Usado hoje em: feed de posts (`app/conteudo/page.tsx`) e grid de mídia da página da modelo (`app/plataforma/mel-santos/page.tsx`).
+
+## Favicon
+
+Adicionado `app/icon.png` e `app/apple-icon.png` (convenção de metadata do Next.js App Router, detectados automaticamente sem precisar configurar nada em `layout.tsx`). Foram gerados a partir do logo `mh_white.png` enviado, que é só o traçado branco sem fundo — por isso ficava invisível como favicon (ícone branco sobre fundo branco do navegador). Foi adicionado um fundo roxo escuro com cantos arredondados para o ícone ficar visível em qualquer tema do navegador.
+
+
 
 Crie um `.env.local` com algo neste formato:
 

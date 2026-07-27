@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useMemo, useRef, useState } from "react"
+import LazyVideo from "@/components/lazy-video"
 import "./conteudo.css"
 
 type Post = {
@@ -242,7 +243,7 @@ export default function PrivacyPage() {
                                     <div className="profile-name">
                                         Mel Santos
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
-                                            <path fill="#065f46" d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
+                                            <path fill="#4d0461" d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
                                         </svg>
                                     </div>
                                     <div className="profile-handle">@melsantos</div>
@@ -345,7 +346,7 @@ export default function PrivacyPage() {
                                         <article key={i} className="feed-card">
                                             <header className="feed-card-header">
                                                 <div className="feed-avatar">
-                                                    <img src="/images/perfilModelo.jpg" alt="foto da modelo" className="fotoModelo" />
+                                                    <img src="/images/perfilModelo.jpg" alt="foto da modelo" className="fotoModelo" loading="lazy" decoding="async" />
                                                 </div>
                                                 <div className="feed-user-info">
                                                     <div className="feed-username">Mel Santos</div>
@@ -353,10 +354,13 @@ export default function PrivacyPage() {
                                                 </div>
                                             </header>
                                             <div className="feed-media">
-                                                <video
+                                                <LazyVideo
                                                     src={post.video}
                                                     className="feed-video"
+                                                    wrapperStyle={{ position: "absolute", inset: 0 }}
                                                     style={{
+                                                        width: "100%",
+                                                        height: "100%",
                                                         transform: `scale(${(post.style as any)?.scale ?? 1})`,
                                                         objectPosition: (post.style as any)?.objectPosition ?? "50% 50%",
                                                         objectFit: "cover",
@@ -435,17 +439,17 @@ export default function PrivacyPage() {
                         <button onClick={() => setPopupActive(false)} className="popup-close">✕</button>
                         <div className="popup-cover">
                             <div className="cover-image">
-                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" />
+                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" loading="lazy" decoding="async" />
                             </div>
                             <div className="popup-profile">
                                 <div className="popup-avatar">
-                                    <img src="/images/perfilModelo.jpg" alt="foto modelo" />
+                                    <img src="/images/perfilModelo.jpg" alt="foto modelo" loading="lazy" decoding="async" />
                                 </div>
                                 <div className="popup-user">
                                     <div className="popup-name">
                                         Mel Santos
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
-                                            <path fill="#065f46" d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
+                                            <path fill="#4d0461" d="M190.6 71.4C203 47.9 227.7 32 256 32s53 15.9 65.4 39.4c3.6 6.8 11.5 10.1 18.8 7.8c25.4-7.8 54.1-1.6 74.1 18.4s26.2 48.7 18.4 74.1c-2.3 7.3 1 15.2 7.8 18.8C464.1 203 480 227.7 480 256s-15.9 53-39.4 65.4c-6.8 3.6-10.1 11.5-7.8 18.8c7.8 25.4 1.6 54.1-18.4 74.1s-48.7 26.2-74.1 18.4c-7.3-2.3-15.2 1-18.8 7.8C309 464.1 284.3 480 256 480s-53-15.9-65.4-39.4c-3.6-6.8-11.5-10.1-18.8-7.8c-25.4 7.8-54.1 1.6-74.1-18.4s-26.2-48.7-18.4-74.1c2.3-7.3-1-15.2-7.8-18.8C47.9 309 32 284.3 32 256s15.9-53 39.4-65.4c6.8-3.6 10.1-11.5 7.8-18.8c-7.8-25.4-1.6-54.1 18.4-74.1s48.7-26.2 74.1-18.4c7.3 2.3 15.2-1 18.8-7.8zM363.3 203.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
                                         </svg>
                                     </div>
                                     <div className="popup-handle">@melsantos</div>
@@ -514,7 +518,7 @@ export default function PrivacyPage() {
                     <div onClick={(e) => e.target === e.currentTarget && fecharPixModal()} className="pix-overlay">
                         <div className="pix-modal">
                             <div className="cover-image">
-                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" />
+                                <img src="/images/mel-santos/f30.webp" alt="imagem banner" className="banner" loading="lazy" decoding="async" />
                             </div>
                             <div className="pix-header">
                                 <div>

@@ -14,7 +14,7 @@
     --search-bg: #f8f8f8;
     --text-color: #333;
     --container-width: 1200px;
-    --theme-color: #069367;
+    --theme-color: #750297;
     --grey-light: #666;
     --grey-text: #536471;
     --shadow-default: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -50,15 +50,15 @@ video {
 /* ==================== ANIMATIONS ==================== */
 @keyframes pulse {
     0% {
-        box-shadow: 0 4px 6px rgba(6, 95, 70, 0.06);
+        box-shadow: 0 4px 6px rgba(77, 4, 97, 0.06);
     }
 
     50% {
-        box-shadow: 0 4px 15px rgba(6, 95, 70, 0.18);
+        box-shadow: 0 4px 15px rgba(77, 4, 97, 0.18);
     }
 
     100% {
-        box-shadow: 0 4px 6px rgba(6, 95, 70, 0.06);
+        box-shadow: 0 4px 6px rgba(77, 4, 97, 0.06);
     }
 }
 
@@ -199,7 +199,7 @@ video {
     height: 140px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #065f46 0%, #069367 100%);
+    background: linear-gradient(135deg, #4d0461 0%, #750297 100%);
     padding-top: 5px;
 }
 
@@ -248,7 +248,7 @@ video {
 .avatar-inner {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #065f46 0%, #069367 100%);
+    background: linear-gradient(135deg, #4d0461 0%, #750297 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -350,8 +350,8 @@ video {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #ecfdf5;
-    color: #065f46;
+    background: #f9ecfd;
+    color: #4d0461;
     font-weight: 700;
     font-size: 12px;
     padding: 6px 10px;
@@ -364,8 +364,8 @@ video {
     padding: 3px 8px;
     font-size: 12px;
     font-weight: 600;
-    color: #047857;
-    background: #ecfdf5;
+    color: #60017b;
+    background: #f9ecfd;
     border-radius: 999px;
 }
 
@@ -376,13 +376,13 @@ video {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    background: linear-gradient(180deg, #069367 0%, #065f46 100%);
+    background: linear-gradient(180deg, #750297 0%, #4d0461 100%);
     color: #ffffff;
     border: none;
     border-radius: 10px;
     padding: 14px 16px;
     cursor: pointer;
-    box-shadow: 0 10px 24px rgba(6, 95, 70, 0.18);
+    box-shadow: 0 10px 24px rgba(77, 4, 97, 0.18);
     font-weight: 800;
     position: relative;
     overflow: hidden;
@@ -405,8 +405,8 @@ video {
 .offer-badge {
     display: inline-block;
     margin-top: 8px;
-    background: #ecfdf5;
-    color: #065f46;
+    background: #f9ecfd;
+    color: #4d0461;
     border-radius: 999px;
     padding: 6px 10px;
     font-weight: 800;
@@ -467,9 +467,9 @@ video {
 }
 
 .btn-secondary.popular {
-    background: #f0fbf7;
-    border: 1px solid #065f46;
-    box-shadow: 0 8px 20px rgba(6, 95, 70, 0.12);
+    background: #f8f0fb;
+    border: 1px solid #4d0461;
+    box-shadow: 0 8px 20px rgba(77, 4, 97, 0.12);
 }
 
 .btn-secondary-left {
@@ -489,8 +489,8 @@ video {
     padding: 3px 8px;
     font-size: 12px;
     font-weight: 600;
-    color: #065f46;
-    background: #ecfdf5;
+    color: #4d0461;
+    background: #f9ecfd;
     border-radius: 999px;
 }
 
@@ -498,8 +498,8 @@ video {
     padding: 3px 8px;
     font-size: 12px;
     font-weight: 600;
-    color: #065f46;
-    background: #ecfdf5;
+    color: #4d0461;
+    background: #f9ecfd;
     border-radius: 999px;
 }
 
@@ -532,7 +532,7 @@ video {
 }
 
 .toggle-btn.active {
-    color: #065f46;
+    color: #4d0461;
 }
 
 .toggle-count {
@@ -577,7 +577,7 @@ video {
     width: 30px;
     height: 30px;
     border-radius: 999px;
-    background: linear-gradient(135deg, #069367 0%, #065f46 100%);
+    background: linear-gradient(135deg, #750297 0%, #4d0461 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -635,7 +635,7 @@ video {
 .feed-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #06936733 0%, #065f4633 100%);
+    background: linear-gradient(135deg, #75029733 0%, #4d046133 100%);
 }
 
 .feed-lock {
@@ -699,7 +699,7 @@ video {
 }
 
 .faq-title {
-    color: #065f46;
+    color: #4d0461;
     font-size: 1.8rem;
     font-weight: 800;
     line-height: 1.2;
@@ -748,14 +748,14 @@ video {
     position: absolute;
     width: 100%;
     height: 2px;
-    background: #065f46;
+    background: #4d0461;
 }
 
 .faq-icon-v {
     position: absolute;
     width: 2px;
     height: 100%;
-    background: #065f46;
+    background: #4d0461;
     opacity: 1;
     transition: opacity 0.3s ease;
 }
@@ -796,7 +796,7 @@ video {
 }
 
 .footer-links a {
-    color: #065f46;
+    color: #4d0461;
     text-decoration: none;
     font-size: 13px;
     font-weight: 400;
@@ -855,7 +855,7 @@ video {
 
 .popup-cover {
     position: relative;
-    background: linear-gradient(135deg, #069367 0%, #065f46 100%);
+    background: linear-gradient(135deg, #750297 0%, #4d0461 100%);
     padding: 10px;
 }
 .popup-cover img {
@@ -878,7 +878,7 @@ video {
     border-radius: 50%;
     border: 0.25rem solid #ffffff;
     overflow: hidden;
-    background: linear-gradient(135deg, #069367 0%, #065f46 100%);
+    background: linear-gradient(135deg, #750297 0%, #4d0461 100%);
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
@@ -946,7 +946,7 @@ video {
 .popup-check {
     width: clamp(0.9rem, 3vw, 0.9rem);
     height: clamp(0.9rem, 3vw, 0.9rem);
-    background: #065f46;
+    background: #4d0461;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -982,7 +982,7 @@ video {
     margin: 0.5rem auto 0.125rem;
     border: none;
     border-radius: 9999px;
-    background: linear-gradient(to right, #069367, #065f46);
+    background: linear-gradient(to right, #750297, #4d0461);
     color: #ffffff;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
@@ -1009,7 +1009,7 @@ video {
 }
 
 .popup-security-item span:first-child {
-    color: #065f46;
+    color: #4d0461;
     font-size: clamp(0.625rem, 3vw, 0.75rem);
 }
 
@@ -1048,7 +1048,7 @@ video {
 }
 
 .pix-header {
-    background: linear-gradient(135deg, #069367, #065f46);
+    background: linear-gradient(135deg, #750297, #4d0461);
     padding: 18px 20px;
     display: flex;
     align-items: center;
@@ -1138,7 +1138,7 @@ video {
 
 .pix-submit {
     width: 100%;
-    background: linear-gradient(135deg, #069367, #065f46);
+    background: linear-gradient(135deg, #750297, #4d0461);
     color: #fff;
     border: none;
     border-radius: 12px;
@@ -1166,8 +1166,8 @@ video {
 .pix-spinner {
     width: 44px;
     height: 44px;
-    border: 4px solid #e6f6ef;
-    border-top-color: #065f46;
+    border: 4px solid #f2e6f6;
+    border-top-color: #4d0461;
     border-radius: 50%;
     animation: spinPix 0.8s linear infinite;
     margin: 0 auto 16px;
@@ -1230,7 +1230,7 @@ video {
 }
 
 .pix-copy {
-    background: #065f46;
+    background: #4d0461;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -1260,7 +1260,7 @@ video {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #065f46;
+    background: #4d0461;
     animation: blinkPix 1.2s infinite;
     flex-shrink: 0;
 }
@@ -1285,18 +1285,18 @@ video {
 .pix-success h3 {
     font-size: 22px;
     font-weight: 800;
-    color: #047857;
+    color: #60017b;
     margin-bottom: 8px;
 }
 
 .pix-success p {
     font-size: 14px;
-    color: #065f46;
+    color: #4d0461;
     margin-bottom: 20px;
 }
 
 .pix-success-btn {
-    background: linear-gradient(135deg, #069367, #065f46);
+    background: linear-gradient(135deg, #750297, #4d0461);
     color: #fff;
     border: none;
     border-radius: 12px;

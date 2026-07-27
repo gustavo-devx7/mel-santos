@@ -67,7 +67,7 @@ export function LoginForm() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="exemplo@gmail.com"
-          className="h-12 w-[85%] rounded-xl border border-neutral-300 bg-white px-4 text-sm text-neutral-900 outline-none transition focus:border-emerald-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
+          className="h-12 w-[85%] rounded-xl border border-neutral-300 bg-white px-4 text-sm text-neutral-900 outline-none transition focus:border-purple-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
           disabled={isLoading}
         />
       </div>
@@ -77,7 +77,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="mb-6 h-12 w-[85%] rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-60"
+        className="mb-6 h-12 w-[85%] rounded-xl bg-purple-500 px-4 text-sm font-semibold text-white transition hover:bg-purple-600 disabled:opacity-60"
       >
         {isLoading ? "Entrando..." : "Acessar plataforma"}
       </button>
